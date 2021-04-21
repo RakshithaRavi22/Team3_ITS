@@ -10,13 +10,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import register.UserDriver;
+
 public class WelcomeGUI implements ActionListener {
 	JLabel label;
 	JFrame frame;
 	JButton Signup, Login;
 	JPanel panel1, panel2, outerPanel;
-
+	private SignUpGUI sign;
+	UserDriver u;
 	
+	public SignUpGUI getSignUpGUI() {
+		return sign;
+	}
+	
+
+	public void setUserD(UserDriver u2) {
+		// TODO Auto-generated method stub
+		u=u2;
+	}
 	public WelcomeGUI() {
 		label = new JLabel("Welcome");
 		label.setFont(new Font(label.getFont().getName(), label.getFont().getStyle(), 50));
@@ -47,15 +59,11 @@ public class WelcomeGUI implements ActionListener {
 	}
 
 
-	public static void main(String[] args) {
-		new WelcomeGUI();
 
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == Signup) {
-//			new SignUpGUI();
 			 try {
 		            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 		                if ("Nimbus".equals(info.getName())) {
@@ -77,7 +85,9 @@ public class WelcomeGUI implements ActionListener {
 //		         Create and display the form 
 		        java.awt.EventQueue.invokeLater(new Runnable() {
 		            public void run() {
-		                new SignUpGUI().setVisible(true);
+		            	sign = new SignUpGUI();
+		            	sign.setVisible(true);
+		            	sign.setUser(u);
 		            }
 		        });
 		}
@@ -88,5 +98,6 @@ public class WelcomeGUI implements ActionListener {
 		}
 		
 	}
+
 
 }

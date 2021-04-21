@@ -1,13 +1,20 @@
 package GUI;
 
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+
+import register.UserDriver;
 
 public class SignUpGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form RegisterFrame
      */// Variables declaration - do not modify    
-	
+	private UserDriver u;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField city;
     private javax.swing.JLabel cityl;
@@ -39,10 +46,68 @@ public class SignUpGUI extends javax.swing.JFrame {
     private javax.swing.JTextField zipcode;
     private javax.swing.JLabel zipcode_label;
     // End of variables declaration   
+   
+    
     public SignUpGUI() {
         initComponents();
     }
 
+    public String getCity() {
+		return city.getText();
+	}
+
+	public String getDob() {
+		return dob.getText();
+	}
+
+	public String getEmail() {
+		return email.getText();
+	}
+
+	public String getGender() {
+		if(maleradio.isSelected())
+			return "M";
+		else return "F";
+	}
+
+	public String getFirstName() {
+		return firstName.getText();
+	}
+
+	public String getLastName() {
+		return lastName.getText();
+	}
+
+	public String get_location() {
+		return location.getText();
+	}
+
+	public String getMobile() {
+		return mobile.getText();
+	}
+
+	public String getPassword() {
+		return password.getPassword().toString();
+	}
+
+	public String get_state() {
+		return state.getText();
+	}
+
+	public String getStreet() {
+		return street.getText();
+	}
+
+	public Long getZipcode() {
+		return Long.parseLong(zipcode.getText());
+	}
+
+	public String getFirst_name() {
+    	return this.firstName.getText();
+    }
+	
+	
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +162,11 @@ public class SignUpGUI extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailActionPerformed(evt);
             }
+        });
+        signupButton.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		int isInserted = u.insert();
+        	}
         });
 
         first_namel.setText("First Name");
@@ -290,7 +360,12 @@ public class SignUpGUI extends javax.swing.JFrame {
 
     private void stateActionPerformed(java.awt.event.ActionEvent evt) {                                      
         // TODO add your handling code here:
-    }                                     
+    }
+
+	public void setUser(UserDriver u2) {
+		// TODO Auto-generated method stub
+		u=u2;
+	}
 
     /**
      * @param args the command line arguments
