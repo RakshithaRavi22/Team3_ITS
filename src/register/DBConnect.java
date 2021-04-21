@@ -1,4 +1,4 @@
-package connectToDB;
+package register;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

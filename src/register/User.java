@@ -1,4 +1,4 @@
-package connectToDB;
+package register;
 
 public class User {
 	private String first_name;

@@ -1,27 +1,50 @@
-package connectToDB;
+package register;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Scanner;
 
-public class AddUser {
+public class UserDriver {
 	
 	Connection con;
 	User user;
 	PreparedStatement pre;
-	
-	public AddUser() {
+	Scanner sc;
+	public UserDriver() {
 		DBConnect connection = new DBConnect();
 		this.con = connection.getCon();
 		user = new User();
-		insert();
+		sc=new Scanner(System.in);
+	}
+	
+	public void delete() {
+		System.out.println("Enter user_id to delete the user");
+		String userId = sc.next();
+		
+		try {
+			pre = con.prepareStatement("delete from user where user_id= ?");
+			pre.setString(1, userId);
+			int ra=pre.executeUpdate();
+			if(ra>0)
+				System.out.println("User Deleted Successfully..");
+			else
+				System.out.println("User was not deleted..");
+			pre.close();
+			sc.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public void insert()
 	{
 		try
 		{
-			Scanner sc=new Scanner(System.in);
+			
 			System.out.println("Enter First Name of User");
 			user.setFirst_name(sc.next());
 			System.out.println("Enter Last Name of User");
@@ -63,9 +86,9 @@ public class AddUser {
 			
 			int ra=pre.executeUpdate();
 			if(ra>0)
-				System.out.println("Student Details Committed..");
+				System.out.println("User Details Committed..");
 			else
-				System.out.println("Student Details are Not Committed..");
+				System.out.println("User Details are Not Committed..");
 			pre.close();
 			sc.close();
 		}
@@ -77,9 +100,9 @@ public class AddUser {
 	
 	
 	public static void main(String[] args) {
-		new AddUser();
+		UserDriver u = new UserDriver();
 		
-		
+		u.delete();
 		
 	}
 }
