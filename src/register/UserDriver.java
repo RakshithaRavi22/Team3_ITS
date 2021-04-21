@@ -2,7 +2,9 @@ package register;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class UserDriver {
@@ -11,6 +13,9 @@ public class UserDriver {
 	User user;
 	PreparedStatement pre;
 	Scanner sc;
+	
+	
+	
 	public UserDriver() {
 		DBConnect connection = new DBConnect();
 		this.con = connection.getCon();
@@ -36,8 +41,6 @@ public class UserDriver {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	public void insert()
@@ -65,12 +68,15 @@ public class UserDriver {
 			user.setMob_no(sc.next());
 			System.out.println("Enter Email Id of User");
 			user.setEmail(sc.next());
+			System.out.println("Enter UserType of User");
+			user.setUserType(sc.next());			
+			System.out.println("Enter Password for User");
+			user.setPassword(sc.next());
 			System.out.println("Enter Zipcode of User");
 			user.setZipcode(sc.nextLong());
-			
-			
+
 			pre=con.prepareStatement("insert into user(first_name, last_name, dob, gender, street, location, city, state, zipcode, mobile_no, email)  values(?,?,?,?,?,?,?,?,?,?,?)");
-			
+
 			
 			pre.setString(1, user.getFirst_name());
 			pre.setString(2,user.getLast_name());
@@ -85,9 +91,37 @@ public class UserDriver {
 			pre.setString(11,user.getEmail());
 			
 			int ra=pre.executeUpdate();
-			if(ra>0)
+			
+			
+			
+			if(ra>0) {
 				System.out.println("User Details Committed..");
-			else
+				
+				
+				String query = "select user_id from user where email="+"\""+user.getEmail()+"\"";
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(query);
+				
+				pre = con.prepareStatement("insert into user_credentials values(?, ?, ?, ?)");
+				
+				if(rs.next())
+					pre.setString(1, rs.getString("user_id"));
+				pre.setString(2, user.getPassword());
+				pre.setString(3, user.getUserType());
+				pre.setInt(4, 0);
+				
+				int ra1 = pre.executeUpdate();
+				
+				if(ra1>0) {
+					System.out.println("User Credentaials table was updated");
+					
+				}
+				else {
+					System.out.println("User credentials was not updated");
+				}
+				
+			}
+			else 
 				System.out.println("User Details are Not Committed..");
 			pre.close();
 			sc.close();
@@ -101,7 +135,6 @@ public class UserDriver {
 	
 	public static void main(String[] args) {
 		UserDriver u = new UserDriver();
-		
 		u.delete();
 		
 	}
