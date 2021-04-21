@@ -1,20 +1,24 @@
 package connectToDB;
 
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 
 import java.util.*;
 
 public class DBConnect {
-	Connection con;
+	private Connection con;
+
 	
+	public Connection getCon() {
+		return con;
+	}
+
+
 	public DBConnect()
 	{
 		try
 		{
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/its", "root","shreyas");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/interview_track_sys", "root","shreyas");
 			System.out.println("connected....");
 		}
 		catch(Exception e)
