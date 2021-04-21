@@ -12,12 +12,17 @@ public class User {
 	private long zipcode;
 	private String mob_no;
 	private String email;
-	
+	private String password;
+	private String userType;
+	private int loginStatus;
 	
 	public User() {}
 	
+
+	
 	public User(String first_name, String last_name, String dob, char gender, String street, String location,
-			String city, String state, long zipcode, String mob_no, String email) {
+			String city, String state, long zipcode, String mob_no, String email, String password, String userType,
+			int loginStatus) {
 		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -30,9 +35,13 @@ public class User {
 		this.zipcode = zipcode;
 		this.mob_no = mob_no;
 		this.email = email;
+		this.password = password;
+		this.userType = userType;
+		this.loginStatus = loginStatus;
 	}
-	
-	
+
+
+
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -109,6 +118,30 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getLoginStatus() {
+		return loginStatus;
+	}
+
+	public void setLoginStatus(int loginStatus) {
+		this.loginStatus = loginStatus;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }
