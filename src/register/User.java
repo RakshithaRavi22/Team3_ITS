@@ -14,9 +14,7 @@ public class User {
 	private String email;
 
 	public User() {}
-	
 
-	
 	public User(String first_name, String last_name, String dob, char gender, String street, String location,
 			String city, String state, long zipcode, String mob_no, String email) {
 		super();
@@ -31,10 +29,9 @@ public class User {
 		this.zipcode = zipcode;
 		this.mob_no = mob_no;
 		this.email = email;
+	
 
 	}
-
-
 
 	public String getFirst_name() {
 		return first_name;
@@ -114,6 +111,7 @@ public class User {
 		this.email = email;
 	}
 
+
 	
 	
 	@Override
@@ -123,4 +121,5 @@ public class User {
 				+ zipcode + ", mob_no=" + mob_no + ", email=" + email + "]\n";
 	}
 	
+
 }
