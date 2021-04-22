@@ -55,33 +55,25 @@ public class UserDriver {
 		try
 		{
 			
-//			System.out.println("Enter First Name of User");
-//			user.setFirst_name(sc.next());
-//			System.out.println("Enter Last Name of User");
-//			user.setLast_name(sc.next());
-//			System.out.println("Enter dob of User");
-//			user.setDob(sc.next());
-//			System.out.println("Enter Gender of User");
-//			user.setGender(sc.next().charAt(0));
-//			System.out.println("Enter Street of User");
-//			user.setStreet(sc.next());
-//			System.out.println("Enter Location of User");
-//			user.setLocation(sc.next());
-//			System.out.println("Enter City of User");
-//			user.setCity(sc.next());
-//			System.out.println("Enter State of User");
-//			user.setState(sc.next());
-//			System.out.println("Enter Mobile of User");
-//			user.setMob_no(sc.next());
-//			System.out.println("Enter Email Id of User");
-//			user.setEmail(sc.next());
-//			System.out.println("Enter UserType of User");
-//			user.setUserType(sc.next());			
-//			System.out.println("Enter Password for User");
-//			user.setPassword(sc.next());
-//			System.out.println("Enter Zipcode of User");
-//			user.setZipcode(sc.nextLong());
-
+			/*
+			 * System.out.println("Enter First Name of User");
+			 * user.setFirst_name(sc.next()); System.out.println("Enter Last Name of User");
+			 * user.setLast_name(sc.next()); System.out.println("Enter dob of User");
+			 * user.setDob(sc.next()); System.out.println("Enter Gender of User");
+			 * user.setGender(sc.next().charAt(0));
+			 * System.out.println("Enter Street of User"); user.setStreet(sc.next());
+			 * System.out.println("Enter Location of User"); user.setLocation(sc.next());
+			 * System.out.println("Enter City of User"); user.setCity(sc.next());
+			 * System.out.println("Enter State of User"); user.setState(sc.next());
+			 * System.out.println("Enter Mobile of User"); user.setMob_no(sc.next());
+			 * System.out.println("Enter Email Id of User"); user.setEmail(sc.next());
+			 * System.out.println("Enter UserType of User"); user.setUserType(sc.next());
+			 * System.out.println("Enter Password for User"); user.setPassword(sc.next());
+			 * System.out.println("Enter Zipcode of User"); user.setZipcode(sc.nextLong());
+			 */
+			
+			
+			
 			pre=con.prepareStatement("insert into user(first_name, last_name, dob, gender, street, location, city, state, zipcode, mobile_no, email)  values(?,?,?,?,?,?,?,?,?,?,?)");
 
 			
@@ -154,7 +146,7 @@ public class UserDriver {
 								 candidateCode.matcher(code).find() ?
 										 "cand" :
 											 "invalid";
-								
+								 
 	}
 	
 	

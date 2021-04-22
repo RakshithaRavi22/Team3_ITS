@@ -86,6 +86,7 @@ public class WelcomeGUI implements ActionListener {
 		        java.awt.EventQueue.invokeLater(new Runnable() {
 		            public void run() {
 		            	sign = new SignUpGUI();
+		            	sign.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		            	sign.setVisible(true);
 		            	sign.setUser(u);
 		            }
