@@ -19,8 +19,18 @@ public class UserDriver {
 	PreparedStatement pre;
 	Scanner sc;
 	WelcomeGUI w;
+<<<<<<< HEAD
 	static SignUpGUI s;
 	
+=======
+	
+
+	public void say() {
+		System.out.println("Im in user driver class");
+	}
+	
+	
+>>>>>>> 6ea7daf5cc7f2c4be838624d68011ceb89c28204
 	public UserDriver() {
 		con = DBConnect.con;
 		user = new User();
@@ -29,18 +39,27 @@ public class UserDriver {
 		w.setUserD(this);
 	}
 	
+<<<<<<< HEAD
 	public boolean delete() {
 		System.out.println("Enter user_id to delete the user");
 		String userId = sc.next();
 		boolean done = false;
+=======
+	public boolean delete(String userId) {
+		boolean done = false;
+		
+>>>>>>> 6ea7daf5cc7f2c4be838624d68011ceb89c28204
 		try {
 			pre = con.prepareStatement("delete from user where user_id= ?");
 			pre.setString(1, userId);
 			int ra=pre.executeUpdate();
+<<<<<<< HEAD
 			if(ra>0)
 				System.out.println("User Deleted Successfully..");
 			else
 				System.out.println("User was not deleted..");
+=======
+>>>>>>> 6ea7daf5cc7f2c4be838624d68011ceb89c28204
 			if(ra>0) {
 				System.out.println("User Deleted Successfully..");
 				done = true;
@@ -57,13 +76,13 @@ public class UserDriver {
 		}
 		return done;
 	}
-	
 	public int insert()
 	{
 		s=w.getSignUpGUI();
 		try
 		{
 			pre=con.prepareStatement("insert into user(first_name, last_name, dob, gender, street, location, city, state, zipcode, mobile_no, email)  values(?,?,?,?,?,?,?,?,?,?,?)");
+<<<<<<< HEAD
 			pre.setString(1, s.getFirstName());
 			pre.setString(2,s.getLastName());
 			pre.setString(3,s.getDob());
@@ -75,6 +94,21 @@ public class UserDriver {
 			pre.setLong(9,s.getZipcode());
 			pre.setString(10,s.getMobile());
 			pre.setString(11,s.getEmail());
+=======
+
+			pre.setString(1, w.getSignUpGUI().getFirstName());
+			pre.setString(2,w.getSignUpGUI().getLastName());
+			pre.setString(3,w.getSignUpGUI().getDob());
+			pre.setString(4,w.getSignUpGUI().getGender());
+			pre.setString(5,w.getSignUpGUI().getStreet());
+			pre.setString(6,w.getSignUpGUI().get_location());
+			pre.setString(7,w.getSignUpGUI().getCity());
+			pre.setString(8,w.getSignUpGUI().get_state());
+			pre.setLong(9,w.getSignUpGUI().getZipcode());
+			pre.setString(10,w.getSignUpGUI().getMobile());
+			pre.setString(11,w.getSignUpGUI().getEmail());
+			
+>>>>>>> 6ea7daf5cc7f2c4be838624d68011ceb89c28204
 			int ra=pre.executeUpdate();
 			
 			
@@ -103,6 +137,7 @@ public class UserDriver {
 				int ra1 = pre.executeUpdate();
 				
 				if(ra1>0) {
+<<<<<<< HEAD
 					System.out.println("User Credentaials table was updated");
 					
 					
@@ -149,6 +184,10 @@ public class UserDriver {
 					}
 					else 
 						return 0;
+=======
+					System.out.println("User Credentials table was updated");
+					return 1;
+>>>>>>> 6ea7daf5cc7f2c4be838624d68011ceb89c28204
 				}
 				else {
 					System.out.println("User credentials was not updated");
@@ -182,7 +221,10 @@ public class UserDriver {
 											 "invalid";
 								
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 6ea7daf5cc7f2c4be838624d68011ceb89c28204
 	public boolean updateUser(String userId) {
 		boolean done = false;
 
@@ -219,6 +261,10 @@ public class UserDriver {
 		}
 		return done;
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 6ea7daf5cc7f2c4be838624d68011ceb89c28204
 	public static void main(String[] args) {
 		new UserDriver();
 	}
