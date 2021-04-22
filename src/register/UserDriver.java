@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
 import GUI.SignUpGUI;
 import GUI.WelcomeGUI;
 
@@ -243,6 +242,16 @@ public class UserDriver {
 		}
 		return done;
 	}
+	
+	
+	
+	
+	public void loginAuth(String userId, String password) {
+		
+		
+		
+	}
+	
 	public static void main(String[] args) {
 		new UserDriver();
 	}
