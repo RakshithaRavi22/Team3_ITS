@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import GUI.SignUpGUI;
 import GUI.WelcomeGUI;
 
 public class UserDriver {
@@ -17,19 +19,8 @@ public class UserDriver {
 	PreparedStatement pre;
 	Scanner sc;
 	WelcomeGUI w;
-<<<<<<< HEAD
+	static SignUpGUI s;
 	
-	public void say() {
-		System.out.println("Im in user driver class");
-	}
-=======
-
-	public void say() {
-		System.out.println("Im in user driver class");
-	}
-	
-	
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 	public UserDriver() {
 		con = DBConnect.con;
 		user = new User();
@@ -38,20 +29,18 @@ public class UserDriver {
 		w.setUserD(this);
 	}
 	
-	public void delete() {
+	public boolean delete() {
 		System.out.println("Enter user_id to delete the user");
 		String userId = sc.next();
-		
+		boolean done = false;
 		try {
 			pre = con.prepareStatement("delete from user where user_id= ?");
 			pre.setString(1, userId);
 			int ra=pre.executeUpdate();
-<<<<<<< HEAD
 			if(ra>0)
 				System.out.println("User Deleted Successfully..");
 			else
 				System.out.println("User was not deleted..");
-=======
 			if(ra>0) {
 				System.out.println("User Deleted Successfully..");
 				done = true;
@@ -60,98 +49,106 @@ public class UserDriver {
 				System.out.println("User was not deleted..");
 				done = false;
 			}
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 			pre.close();
 			sc.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return done;
 	}
 	
 	public int insert()
 	{
+		s=w.getSignUpGUI();
 		try
 		{
-			
-//			System.out.println("Enter First Name of User");
-//			user.setFirst_name(sc.next());
-//			System.out.println("Enter Last Name of User");
-//			user.setLast_name(sc.next());
-//			System.out.println("Enter dob of User");
-//			user.setDob(sc.next());
-//			System.out.println("Enter Gender of User");
-//			user.setGender(sc.next().charAt(0));
-//			System.out.println("Enter Street of User");
-//			user.setStreet(sc.next());
-//			System.out.println("Enter Location of User");
-//			user.setLocation(sc.next());
-//			System.out.println("Enter City of User");
-//			user.setCity(sc.next());
-//			System.out.println("Enter State of User");
-//			user.setState(sc.next());
-//			System.out.println("Enter Mobile of User");
-//			user.setMob_no(sc.next());
-//			System.out.println("Enter Email Id of User");
-//			user.setEmail(sc.next());
-//			System.out.println("Enter UserType of User");
-//			user.setUserType(sc.next());			
-//			System.out.println("Enter Password for User");
-//			user.setPassword(sc.next());
-//			System.out.println("Enter Zipcode of User");
-//			user.setZipcode(sc.nextLong());
-
 			pre=con.prepareStatement("insert into user(first_name, last_name, dob, gender, street, location, city, state, zipcode, mobile_no, email)  values(?,?,?,?,?,?,?,?,?,?,?)");
-
-<<<<<<< HEAD
-			
-=======
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
-			pre.setString(1, w.getSignUpGUI().getFirstName());
-			pre.setString(2,w.getSignUpGUI().getLastName());
-			pre.setString(3,w.getSignUpGUI().getDob());
-			pre.setString(4,w.getSignUpGUI().getGender());
-			pre.setString(5,w.getSignUpGUI().getStreet());
-			pre.setString(6,w.getSignUpGUI().get_location());
-			pre.setString(7,w.getSignUpGUI().getCity());
-			pre.setString(8,w.getSignUpGUI().get_state());
-			pre.setLong(9,w.getSignUpGUI().getZipcode());
-			pre.setString(10,w.getSignUpGUI().getMobile());
-			pre.setString(11,w.getSignUpGUI().getEmail());
-<<<<<<< HEAD
-=======
-		
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
-			
+			pre.setString(1, s.getFirstName());
+			pre.setString(2,s.getLastName());
+			pre.setString(3,s.getDob());
+			pre.setString(4,s.getGender());
+			pre.setString(5,s.getStreet());
+			pre.setString(6,s.get_location());
+			pre.setString(7,s.getCity());
+			pre.setString(8,s.get_state());
+			pre.setLong(9,s.getZipcode());
+			pre.setString(10,s.getMobile());
+			pre.setString(11,s.getEmail());
 			int ra=pre.executeUpdate();
 			
 			
 			
 			if(ra>0) {
+				String new_user_id="";
+				String userType = s.getUserType();
+				userType = userType.substring(0,1);
+				
 				System.out.println("User Details Committed..");
 				
-				String query = "select user_id from user where email="+"\""+w.getSignUpGUI().getEmail()+"\"";
+				String query = "select user_id from user where email="+"\""+s.getEmail()+"\"";
 				
-<<<<<<< HEAD
-				String query = "select user_id from user where email="+"\""+w.getSignUpGUI().getEmail()+"\"";
-=======
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				
 				pre = con.prepareStatement("insert into user_credentials values(?, ?, ?, ?)");
 				
 				if(rs.next())
-					pre.setString(1, rs.getString("user_id"));
-				pre.setString(2, w.getSignUpGUI().getPassword());
-				pre.setString(3, "A");
+					new_user_id = rs.getString("user_id");
+				pre.setString(1, new_user_id);
+				pre.setString(2, s.getPassword());
+				pre.setString(3, userType);
 				pre.setInt(4, 0);
 				
 				int ra1 = pre.executeUpdate();
 				
 				if(ra1>0) {
 					System.out.println("User Credentaials table was updated");
-					return 1;
+					
+					
+					if(userType.equalsIgnoreCase("c")) {
+						float exper = s.getExperience();
+						DecimalFormat df = new DecimalFormat("#.00");  
+						exper= Float.valueOf(df.format(exper));
+						    
+						    
+						pre = con.prepareStatement("insert into its_tbl_candidate values(?,?,?,?,?,?,?,?,?)");
+						pre.setString(1, new_user_id);
+						pre.setString(2, s.getprimary_skill());
+						pre.setString(3, s.getsecondary_skill());
+						pre.setFloat(4, exper);
+						pre.setString(5, s.getQualifiication());
+						pre.setString(6, s.getDesignation());
+						pre.setInt(7, s.getNoticePeriod());
+						pre.setString(8, s.getOtherLocation());
+						pre.setInt(9, 1);
+						
+						ra1 = pre.executeUpdate();
+						
+					}
+					else if(userType.equalsIgnoreCase("t")) {
+						pre = con.prepareStatement("insert into its_tbl_techpanel values(?,?,?)");
+						pre.setString(1, new_user_id);
+						pre.setString(2, s.getFirstName()+" "+s.getLastName());
+						pre.setString(3, s.getSubjectFiled());
+						
+						ra1 = pre.executeUpdate();
+						
+					}
+					else if(userType.equalsIgnoreCase("h")) {
+						pre = con.prepareStatement("insert into its_tbl_hrpanel values(?,?)");
+						pre.setString(1, new_user_id);
+						pre.setString(2, s.getFirstName()+" "+s.getLastName());
+						
+						ra1 = pre.executeUpdate();
+					}
+					
+					if(ra1>0) {
+						System.out.println("Tech/hr/candidate updated");
+						return 1;
+					}
+					else 
+						return 0;
 				}
 				else {
 					System.out.println("User credentials was not updated");
@@ -185,9 +182,7 @@ public class UserDriver {
 											 "invalid";
 								
 	}
-<<<<<<< HEAD
 	
-=======
 	public boolean updateUser(String userId) {
 		boolean done = false;
 
@@ -224,9 +219,7 @@ public class UserDriver {
 		}
 		return done;
 	}
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
-	
 	public static void main(String[] args) {
-		UserDriver u = new UserDriver();
+		new UserDriver();
 	}
 }
