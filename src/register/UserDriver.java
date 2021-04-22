@@ -46,7 +46,7 @@ public class UserDriver {
 		}
 	}
 	
-	public void insert()
+	public int insert()
 	{
 		try
 		{
@@ -117,22 +117,27 @@ public class UserDriver {
 				
 				if(ra1>0) {
 					System.out.println("User Credentials table was updated");
+					return 1;
 					
 				}
 				else {
 					System.out.println("User credentials was not updated");
+					return 0;
 				}
-				
 			}
 			else 
 				System.out.println("User Details are Not Committed..");
 			pre.close();
 			sc.close();
+		
+			return 0;
+			
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+		return 0;
 	} 
 	
 	public String authenticateUserCode(String code) {
