@@ -6,15 +6,10 @@ import java.sql.DriverManager;
 import java.util.*;
 
 public class DBConnect {
-	private Connection con;
-
-	
-	public Connection getCon() {
-		return con;
-	}
+	static Connection con;
 
 
-	public DBConnect()
+	static
 	{
 		try
 		{
