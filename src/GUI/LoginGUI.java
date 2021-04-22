@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import register.UserDriver;
+
 public class LoginGUI implements ActionListener {
 
 	JFrame frame;
@@ -20,7 +22,7 @@ public class LoginGUI implements ActionListener {
 	JPasswordField password;
 	JButton submit;
 	String uname, psswd;
-	JComboBox<String> userType;
+	
 	
 	public LoginGUI() {
 		
@@ -31,10 +33,8 @@ public class LoginGUI implements ActionListener {
 		submit = new JButton("Submit");
 		submit.addActionListener(this);
 		
-		label = new JLabel("Choose User Type");
-		String[] users = {"Admin", "Tech", "HR","Candidate" };
-		userType = new JComboBox<String>(users);
-		userType.setSelectedItem(null);
+		label = new JLabel("");
+
 		
 		label1 = new JLabel("Enter UserID and Password");
 		username = new JTextField(10);
@@ -44,16 +44,15 @@ public class LoginGUI implements ActionListener {
 		
 		
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		panel1.add(label);
-		panel1.add(userType);
+
 		panel2.add(label1);
 		panel2.add(username);
 		panel2.add(password);
 		panel2.add(submit);
 		panel2.add(ul);
-		
-		outerPanel.add(panel1, BorderLayout.NORTH);
-		outerPanel.add(panel2, BorderLayout.CENTER);
+		panel1.add(label);
+		outerPanel.add(panel2, BorderLayout.NORTH);
+		outerPanel.add(panel1, BorderLayout.CENTER);
 		frame.add(outerPanel);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,24 +74,33 @@ public class LoginGUI implements ActionListener {
 		if(username.getText().length() != 0 && password.getPassword().length != 0) 
 		{	
 			if (e.getSource() == submit) {
-				username.setText("");
-				password.setText("");
-				uname = username.getText();
-				psswd = new String(password.getPassword());				
 				
-				String ut = (String) userType.getSelectedItem();
-				if(userType.getSelectedItem().equals("HR")) {
-					HRPanelFrame hr = new HRPanelFrame();
-					hr.setVisible(true);
-				}
-				else if(ut.equals("Tech")) {
-					TechPanelFrame tp = new TechPanelFrame();
-					tp.setVisible(true);
-				}
-				else if(ut.equals("Candidate")) {
+				uname = username.getText();
+				psswd = new String(password.getPassword());	
+				
+				String userType = UserDriver.loginAuth(uname, psswd);
+				
+				if(userType.equals("candidate"))
+				{
 					CandidatePanelFrame cp = new CandidatePanelFrame();
 					cp.setVisible(true);
-				}				
+					frame.dispose();
+				}
+				else if(userType.equals("technical")) {
+					TechPanelFrame tp = new TechPanelFrame();
+					tp.setVisible(true);
+					frame.dispose();
+				}
+				else if(userType.equals("hr")) {
+					HRPanelFrame hr = new HRPanelFrame();
+					hr.setVisible(true);
+					frame.dispose();
+				}
+				else {
+					label.setText("Invalid User");
+				}
+				
+				
 			}			
 		}
 		else ul.setText("Enter all fields");

@@ -74,7 +74,6 @@ public class WelcomeGUI implements ActionListener {
 		frame.add(outerPanel);
 		frame.setVisible(true);
 		
-
 	}
 
 

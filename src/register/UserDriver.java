@@ -246,8 +246,29 @@ public class UserDriver {
 	
 	
 	
-	public void loginAuth(String userId, String password) {
-		
+	public static String loginAuth(String userId, String password) {
+		String user ="invalid";
+		try {
+			
+			UserCredentials uc = new UserCredentials(userId);
+			char userType = uc.getUserType();
+			if(uc.checkUserCredentials(password)) {
+				if(userType=='c')
+					user= "candidate";
+				else if(userType=='t')
+					user= "technical";
+				else if(userType=='a')
+					user = "admin";
+				else if(userType=='h')
+					user = "hr";
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 		
 		
 	}
