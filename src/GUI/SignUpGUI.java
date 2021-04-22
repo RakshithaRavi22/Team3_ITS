@@ -15,6 +15,8 @@ public class SignUpGUI extends javax.swing.JFrame {
      * Creates new form RegisterFrame
      */// Variables declaration - do not modify    
 	private UserDriver u;
+	JFrame frame;
+	
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField city;
     private javax.swing.JLabel cityl;
