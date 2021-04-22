@@ -20,7 +20,7 @@ public class WelcomeGUI implements ActionListener {
 	static JLabel msg;
 	JFrame frame;
 	JButton Signup, Login;
-	JPanel panel1, panel2, outerPanel, panel3;
+	JPanel panel1, panel2, outerPanel;
 	private SignUpGUI sign;
 	UserDriver u;
 	
@@ -37,11 +37,11 @@ public class WelcomeGUI implements ActionListener {
 	}
 
 	public void setUserD(UserDriver u2) {
-		// TODO Auto-generated method stub
 		u=u2;
 	}
 	public WelcomeGUI() {
-		label = new JLabel("Welcome",2);
+		
+		label = new JLabel("Welcome");
 		label.setFont(new Font(label.getFont().getName(), label.getFont().getStyle(), 50));
 		
 		frame = new JFrame();
@@ -52,13 +52,11 @@ public class WelcomeGUI implements ActionListener {
 		Signup.addActionListener(this);
 		Login.addActionListener(this);
 		
-		msg = new JLabel("",2);
-		
+		msg = new JLabel();
 		
 		panel1 = new JPanel();
 		panel2 = new JPanel();
 		
-		panel1.setLayout(new GridLayout(2,2));
 		
 		panel1.add(label);
 		panel2.add(Signup);
@@ -74,7 +72,6 @@ public class WelcomeGUI implements ActionListener {
 		frame.add(outerPanel);
 		frame.setVisible(true);
 		
-
 	}
 
 
