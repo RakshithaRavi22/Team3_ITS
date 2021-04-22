@@ -13,7 +13,7 @@ public class DBConnect {
 	{
 		try
 		{
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/interview_track_sys", "root","shreyas");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/interview_track_sys", "root","root123");
 			System.out.println("connected....");
 		}
 		catch(Exception e)

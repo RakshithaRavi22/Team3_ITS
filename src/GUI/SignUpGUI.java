@@ -20,6 +20,7 @@ public class SignUpGUI extends javax.swing.JFrame {
 	JFrame frame;
 	JButton authButton;
 	private javax.swing.JButton authenticateBtn;
+
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField city;
     private javax.swing.JLabel cityl;
@@ -229,6 +230,7 @@ public class SignUpGUI extends javax.swing.JFrame {
         subjectPanel = new javax.swing.JLabel();
         subjectFiled = new javax.swing.JTextField();
         errorMessage = new javax.swing.JLabel();
+        
 
         jLabel1.setText("jLabel1");
 
@@ -308,7 +310,11 @@ public class SignUpGUI extends javax.swing.JFrame {
             }
 
 			private void signupButtonActionPerformed(ActionEvent evt) {
-				u.insert();
+				int val = u.insert();
+				
+				dispose();
+				WelcomeGUI.ErrorMsg(val);
+				
 			}
         });
 
