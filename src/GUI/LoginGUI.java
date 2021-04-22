@@ -20,6 +20,7 @@ public class LoginGUI implements ActionListener {
 	JPasswordField password;
 	JButton submit;
 	String uname, psswd;
+	JComboBox<String> userType;
 	
 	public LoginGUI() {
 		
@@ -31,14 +32,16 @@ public class LoginGUI implements ActionListener {
 		submit.addActionListener(this);
 		
 		label = new JLabel("Choose User Type");
-		String[] users = {"Admin", "Tech", "HR" };
-		JComboBox<String> userType = new JComboBox<String>(users);
+		String[] users = {"Admin", "Tech", "HR","Candidate" };
+		userType = new JComboBox<String>(users);
+		userType.setSelectedItem(null);
 		
 		label1 = new JLabel("Enter UserID and Password");
 		username = new JTextField(10);
 		password = new JPasswordField(10);
 		
 		ul = new JLabel();
+		
 		
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		panel1.add(label);
@@ -69,14 +72,27 @@ public class LoginGUI implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 //		String s = (String) e.getSource();
-		if(username.getText().length() != 0 && password.getPassword().length != 0) {
-			
+		if(username.getText().length() != 0 && password.getPassword().length != 0) 
+		{	
 			if (e.getSource() == submit) {
 				username.setText("");
 				password.setText("");
 				uname = username.getText();
-				psswd = new String(password.getPassword());
-				frame.dispose();
+				psswd = new String(password.getPassword());				
+				
+				String ut = (String) userType.getSelectedItem();
+				if(userType.getSelectedItem().equals("HR")) {
+					HRPanelFrame hr = new HRPanelFrame();
+					hr.setVisible(true);
+				}
+				else if(ut.equals("Tech")) {
+					TechPanelFrame tp = new TechPanelFrame();
+					tp.setVisible(true);
+				}
+				else if(ut.equals("Candidate")) {
+					CandidatePanelFrame cp = new CandidatePanelFrame();
+					cp.setVisible(true);
+				}				
 			}			
 		}
 		else ul.setText("Enter all fields");

@@ -6,19 +6,14 @@ import java.sql.DriverManager;
 import java.util.*;
 
 public class DBConnect {
-	private Connection con;
-
-	
-	public Connection getCon() {
-		return con;
-	}
+	static Connection con;
 
 
-	public DBConnect()
+	static
 	{
 		try
 		{
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/interview_track_sys", "root","shreyas");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/interview_track_sys", "root","root123");
 			System.out.println("connected....");
 		}
 		catch(Exception e)
