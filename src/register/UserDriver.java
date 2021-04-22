@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import GUI.WelcomeGUI;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserDriver {
 	
@@ -21,8 +23,7 @@ public class UserDriver {
 		System.out.println("Im in user driver class");
 	}
 	public UserDriver() {
-		DBConnect connection = new DBConnect();
-		this.con = connection.getCon();
+		this.con = DBConnect.con;
 		user = new User();
 		sc=new Scanner(System.in);
 		w=new WelcomeGUI();
@@ -140,6 +141,21 @@ public class UserDriver {
 		}
 		return 0;
 	} 
+	
+	public String authenticateUserCode(String code) {
+		 Pattern technicalCode = Pattern.compile("^techwiley[0-9]{4}$", Pattern.CASE_INSENSITIVE);
+		 Pattern hrCode = Pattern.compile("^hrwiley[0-9]{4}$", Pattern.CASE_INSENSITIVE);
+		 Pattern candidateCode = Pattern.compile("^candwiley[0-9]{4}$", Pattern.CASE_INSENSITIVE);
+		 
+		 return technicalCode.matcher(code).find() ? 
+				 "tech" :
+					 hrCode.matcher(code).find() ?
+							 "hr" :
+								 candidateCode.matcher(code).find() ?
+										 "cand" :
+											 "invalid";
+								
+	}
 	
 	
 	public static void main(String[] args) {
