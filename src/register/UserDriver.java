@@ -17,10 +17,19 @@ public class UserDriver {
 	PreparedStatement pre;
 	Scanner sc;
 	WelcomeGUI w;
+<<<<<<< HEAD
 	
 	public void say() {
 		System.out.println("Im in user driver class");
 	}
+=======
+
+	public void say() {
+		System.out.println("Im in user driver class");
+	}
+	
+	
+>>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 	public UserDriver() {
 		con = DBConnect.con;
 		user = new User();
@@ -37,10 +46,21 @@ public class UserDriver {
 			pre = con.prepareStatement("delete from user where user_id= ?");
 			pre.setString(1, userId);
 			int ra=pre.executeUpdate();
+<<<<<<< HEAD
 			if(ra>0)
 				System.out.println("User Deleted Successfully..");
 			else
 				System.out.println("User was not deleted..");
+=======
+			if(ra>0) {
+				System.out.println("User Deleted Successfully..");
+				done = true;
+			}
+			else {
+				System.out.println("User was not deleted..");
+				done = false;
+			}
+>>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 			pre.close();
 			sc.close();
 			
@@ -83,7 +103,10 @@ public class UserDriver {
 
 			pre=con.prepareStatement("insert into user(first_name, last_name, dob, gender, street, location, city, state, zipcode, mobile_no, email)  values(?,?,?,?,?,?,?,?,?,?,?)");
 
+<<<<<<< HEAD
 			
+=======
+>>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 			pre.setString(1, w.getSignUpGUI().getFirstName());
 			pre.setString(2,w.getSignUpGUI().getLastName());
 			pre.setString(3,w.getSignUpGUI().getDob());
@@ -95,6 +118,10 @@ public class UserDriver {
 			pre.setLong(9,w.getSignUpGUI().getZipcode());
 			pre.setString(10,w.getSignUpGUI().getMobile());
 			pre.setString(11,w.getSignUpGUI().getEmail());
+<<<<<<< HEAD
+=======
+		
+>>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 			
 			int ra=pre.executeUpdate();
 			
@@ -103,8 +130,12 @@ public class UserDriver {
 			if(ra>0) {
 				System.out.println("User Details Committed..");
 				
-				
 				String query = "select user_id from user where email="+"\""+w.getSignUpGUI().getEmail()+"\"";
+				
+<<<<<<< HEAD
+				String query = "select user_id from user where email="+"\""+w.getSignUpGUI().getEmail()+"\"";
+=======
+>>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				
@@ -154,7 +185,46 @@ public class UserDriver {
 											 "invalid";
 								
 	}
+<<<<<<< HEAD
 	
+=======
+	public boolean updateUser(String userId) {
+		boolean done = false;
+
+		try {
+			pre = con.prepareStatement("update user set first_name = ?, last_name = ?, dob = ?, gender = ?, street = ?, location = ?, city = ?, state = ?, zipcode = ?, mobile_no = ?, email = ? where user_id= ?");
+			// Uncomment when done with GUI
+
+//			pre.setString(1, getFirstName());
+//			pre.setString(2, getLastName());
+//			pre.setString(3, getDob());
+//			pre.setString(4, getGender());
+//			pre.setString(5, getStreet());
+//			pre.setString(6, get_location());
+//			pre.setString(7, getCity());
+//			pre.setString(8, get_state());
+//			pre.setString(9, getZipcode());
+//			pre.setString(10, getMobile());
+//			pre.setString(11, getEmail());
+			pre.setString(12, userId);
+			int ra=pre.executeUpdate();
+			if(ra>0) {
+				System.out.println("Users details updated successfully..");
+				done = true;
+			}
+			else {
+				System.out.println("Users details are not updated");
+				done = false;
+			}
+			pre.close();
+			sc.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return done;
+	}
+>>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 	
 	public static void main(String[] args) {
 		UserDriver u = new UserDriver();
