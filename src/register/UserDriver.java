@@ -17,19 +17,13 @@ public class UserDriver {
 	PreparedStatement pre;
 	Scanner sc;
 	WelcomeGUI w;
-<<<<<<< HEAD
 	
-	public void say() {
-		System.out.println("Im in user driver class");
-	}
-=======
 
 	public void say() {
 		System.out.println("Im in user driver class");
 	}
 	
 	
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 	public UserDriver() {
 		con = DBConnect.con;
 		user = new User();
@@ -38,20 +32,13 @@ public class UserDriver {
 		w.setUserD(this);
 	}
 	
-	public void delete() {
-		System.out.println("Enter user_id to delete the user");
-		String userId = sc.next();
+	public boolean delete(String userId) {
+		boolean done = false;
 		
 		try {
 			pre = con.prepareStatement("delete from user where user_id= ?");
 			pre.setString(1, userId);
 			int ra=pre.executeUpdate();
-<<<<<<< HEAD
-			if(ra>0)
-				System.out.println("User Deleted Successfully..");
-			else
-				System.out.println("User was not deleted..");
-=======
 			if(ra>0) {
 				System.out.println("User Deleted Successfully..");
 				done = true;
@@ -60,15 +47,14 @@ public class UserDriver {
 				System.out.println("User was not deleted..");
 				done = false;
 			}
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 			pre.close();
 			sc.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return done;
 	}
-	
 	public int insert()
 	{
 		try
@@ -103,10 +89,6 @@ public class UserDriver {
 
 			pre=con.prepareStatement("insert into user(first_name, last_name, dob, gender, street, location, city, state, zipcode, mobile_no, email)  values(?,?,?,?,?,?,?,?,?,?,?)");
 
-<<<<<<< HEAD
-			
-=======
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 			pre.setString(1, w.getSignUpGUI().getFirstName());
 			pre.setString(2,w.getSignUpGUI().getLastName());
 			pre.setString(3,w.getSignUpGUI().getDob());
@@ -118,10 +100,6 @@ public class UserDriver {
 			pre.setLong(9,w.getSignUpGUI().getZipcode());
 			pre.setString(10,w.getSignUpGUI().getMobile());
 			pre.setString(11,w.getSignUpGUI().getEmail());
-<<<<<<< HEAD
-=======
-		
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 			
 			int ra=pre.executeUpdate();
 			
@@ -132,10 +110,6 @@ public class UserDriver {
 				
 				String query = "select user_id from user where email="+"\""+w.getSignUpGUI().getEmail()+"\"";
 				
-<<<<<<< HEAD
-				String query = "select user_id from user where email="+"\""+w.getSignUpGUI().getEmail()+"\"";
-=======
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery(query);
 				
@@ -150,7 +124,7 @@ public class UserDriver {
 				int ra1 = pre.executeUpdate();
 				
 				if(ra1>0) {
-					System.out.println("User Credentaials table was updated");
+					System.out.println("User Credentials table was updated");
 					return 1;
 				}
 				else {
@@ -185,9 +159,6 @@ public class UserDriver {
 											 "invalid";
 								
 	}
-<<<<<<< HEAD
-	
-=======
 	public boolean updateUser(String userId) {
 		boolean done = false;
 
@@ -224,7 +195,6 @@ public class UserDriver {
 		}
 		return done;
 	}
->>>>>>> bab94b63b4e37df11da59f38e5f76189eedb0b26
 	
 	public static void main(String[] args) {
 		UserDriver u = new UserDriver();
