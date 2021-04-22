@@ -26,25 +26,30 @@ public class UserDriver {
 		sc=new Scanner(System.in);
 	}
 	
-	public void delete() {
-		System.out.println("Enter user_id to delete the user");
-		String userId = sc.next();
+	public boolean delete(String userId) {
+		boolean done = false;
 		
 		try {
 			pre = con.prepareStatement("delete from user where user_id= ?");
 			pre.setString(1, userId);
 			int ra=pre.executeUpdate();
-			if(ra>0)
-				System.out.println("User Deleted Successfully..");
-			else
-				System.out.println("User was not deleted..");
+			if(ra>0) {
+				System.out.println("User removed successfully ...");
+				done = true;
+			}
+			else {
+				System.out.println("Could not delete the user..");
+				done = false;
+			}
 			pre.close();
 			sc.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return done;
 	}
+	
 	
 	public int insert()
 	{
@@ -155,6 +160,43 @@ public class UserDriver {
 								
 	}
 	
+	public boolean updateUser(String userId) {
+		boolean done = false;
+		
+		try {
+			pre = con.prepareStatement("update user set first_name = ?, last_name = ?, dob = ?, gender = ?, street = ?, location = ?, city = ?, state = ?, zipcode = ?, mobile_no = ?, email = ? where user_id= ?");
+			// Uncomment when done with GUI
+			
+//			pre.setString(1, getFirstName());
+//			pre.setString(2, getLastName());
+//			pre.setString(3, getDob());
+//			pre.setString(4, getGender());
+//			pre.setString(5, getStreet());
+//			pre.setString(6, get_location());
+//			pre.setString(7, getCity());
+//			pre.setString(8, get_state());
+//			pre.setString(9, getZipcode());
+//			pre.setString(10, getMobile());
+//			pre.setString(11, getEmail());
+			pre.setString(12, userId);
+			int ra=pre.executeUpdate();
+			if(ra>0) {
+				System.out.println("Users details updated successfully..");
+				done = true;
+			}
+			else {
+				System.out.println("Users details are not updated");
+				done = false;
+			}
+			pre.close();
+			sc.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return done;
+	}
+
 	
 	public static void main(String[] args) {
 		UserDriver u = new UserDriver();
