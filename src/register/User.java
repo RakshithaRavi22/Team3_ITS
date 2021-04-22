@@ -12,7 +12,11 @@ public class User {
 	private long zipcode;
 	private String mob_no;
 	private String email;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 1009f2f69fba2f00c8b91925c0ee30dc40eabae8
 	public User() {}
 
 	public User(String first_name, String last_name, String dob, char gender, String street, String location,
@@ -29,6 +33,12 @@ public class User {
 		this.zipcode = zipcode;
 		this.mob_no = mob_no;
 		this.email = email;
+<<<<<<< HEAD
+=======
+
+	}
+
+>>>>>>> 1009f2f69fba2f00c8b91925c0ee30dc40eabae8
 
 	}
 
@@ -110,4 +120,16 @@ public class User {
 		this.email = email;
 	}
 
+<<<<<<< HEAD
+=======
+	
+	
+	@Override
+	public String toString() {
+		return "User [first_name=" + first_name + ", last_name=" + last_name + ", dob=" + dob + ", gender=" + gender
+				+ ", street=" + street + ", location=" + location + ", city=" + city + ", state=" + state + ", zipcode="
+				+ zipcode + ", mob_no=" + mob_no + ", email=" + email + "]\n";
+	}
+	
+>>>>>>> 1009f2f69fba2f00c8b91925c0ee30dc40eabae8
 }
