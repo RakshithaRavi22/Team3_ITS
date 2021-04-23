@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package views;
 
+@SuppressWarnings("serial")
 public class HRPanelFrame extends javax.swing.JFrame {
 
 	private javax.swing.JLabel jLabel1;

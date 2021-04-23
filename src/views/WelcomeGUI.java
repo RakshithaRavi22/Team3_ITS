@@ -1,4 +1,4 @@
-package GUI;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import register.UserDriver;
+import pojos.UserDriver;
 
 public class WelcomeGUI implements ActionListener {
 	JLabel label;

@@ -1,5 +1,5 @@
 
-package GUI;
+package views;
 
 public class CandidatePanelFrame extends javax.swing.JFrame {
 

@@ -1,4 +1,4 @@
-package register;
+package pojos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,10 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import GUI.SignUpGUI;
-import GUI.WelcomeGUI;
+
+import dao.DBConnect;
+import views.SignUpGUI;
+import views.WelcomeGUI;
 
 public class UserDriver {
 	

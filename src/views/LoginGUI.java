@@ -1,4 +1,4 @@
-package GUI;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import register.UserDriver;
+import pojos.UserDriver;
 
 public class LoginGUI implements ActionListener {
 

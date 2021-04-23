@@ -1,9 +1,11 @@
-package register;
+package pojos;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import dao.DBConnect;
 
 public class UserCredentials {
     private String userId;
