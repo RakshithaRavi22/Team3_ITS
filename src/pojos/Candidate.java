@@ -42,7 +42,7 @@ public class Candidate {
 		}
 	}
 	
-	public Candidate(String candidateId, String primarySkills, String secondarySkills, float experience,
+	public Candidate( String primarySkills, String secondarySkills, float experience,
 			String qualification, String designation, int noticePeriod, String location, int shareDetails) {
 		super();
 		//this.candidateId = candidateId;
@@ -55,6 +55,7 @@ public class Candidate {
 		this.location = location;
 		this.shareDetails = shareDetails;
 	}
+
 	/*
 	public void setCandidateId(String candidateId) {
 		this.candidateId = candidateId;
@@ -122,6 +123,7 @@ public class Candidate {
 	
 	public ArrayList<User> getDetails() throws SQLException {
 		String query = "select * from user where user_id="+"\""+candidateId+"\"";
+		
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		ArrayList<User> details = new ArrayList<>();
@@ -145,6 +147,26 @@ public class Candidate {
 		
 	}
 	
+	public  ArrayList<Candidate> getProfessionalDetails() {
+        ArrayList<Candidate> proffDetails = new ArrayList<Candidate>();
+        proffDetails.add(new Candidate(this.getPrimarySkills(), 
+                this.getSecondarySkills(),
+                this.getExperience(),
+                this.getQualification(),
+                this.getDesignation(),
+                this.getNoticePeriod(),
+                this.getLocation(),
+                this.getShareDetails()));
+        return proffDetails;
+
+    }
+@Override
+    public String toString() {
+        return "Candidate [primarySkills=" + primarySkills + ", secondarySkills=" + secondarySkills + ", experience="
+                + experience + ", qualification=" + qualification + ", designation=" + designation + ", noticePeriod="
+                + noticePeriod + ", location=" + location + ", shareDetails=" + shareDetails + ", con=" + con
+                + ", candidateId=" + candidateId + "]\n";
+    }
 //	public static void main(String args[]) throws SQLException {
 //		Candidate c = new Candidate("a1000");
 //		c.getDetails();
