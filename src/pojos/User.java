@@ -255,6 +255,8 @@ public class User {
 		this.userId = userId;
 	}
 	
+	
+	
 	public ArrayList<User> getDetails() throws SQLException {
 		ArrayList<User> details = new ArrayList<>();
 			details.add(this);

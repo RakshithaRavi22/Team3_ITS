@@ -92,20 +92,19 @@ public class LoginGUI implements ActionListener {
 				if(userType.get("userType").equals("cand"))
 				{
 
-//					CandidatePanelFrame cp = new CandidatePanelFrame();
 					CandidatePanelFrame cp = new CandidatePanelFrame(userType);
 					cp.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					cp.setVisible(true);
 					frame.dispose();
 				}
-				else if(userType.equals("technical")) {
-					TechPanelFrame tp = new TechPanelFrame();
+				else if(userType.get("userType").equals("tech")) {
+					TechPanelFrame tp = new TechPanelFrame(userType);
 					tp.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					tp.setVisible(true);
 					frame.dispose();
 				}
-				else if(userType.equals("hr")) {
-					HRPanelFrame hr = new HRPanelFrame();
+				else if(userType.get("userType").equals("hr")) {
+					HRPanelFrame hr = new HRPanelFrame(userType);
 					hr.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					hr.setVisible(true);
 					frame.dispose();

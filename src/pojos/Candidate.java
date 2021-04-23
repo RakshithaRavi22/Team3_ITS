@@ -121,31 +121,6 @@ public class Candidate {
 		return shareDetails;
 	}
 	
-	public ArrayList<User> getDetails() throws SQLException {
-		String query = "select * from user where user_id="+"\""+candidateId+"\"";
-		
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(query);
-		ArrayList<User> details = new ArrayList<>();
-		
-		if(rs.next()) {
-			details.add(new User(rs.getString("first_name"), 
-					rs.getString("last_name"),
-					rs.getString("dob"),
-					rs.getString("gender").charAt(0),
-					rs.getString("street"),
-					rs.getString("location"),
-					rs.getString("city"),
-					rs.getString("state"),
-					rs.getLong("zipcode"),
-					rs.getString("mobile_no"),
-					rs.getString("email")));
-		}
-//		System.out.println(details);
-//		System.out.println("\nfirst name is:" + details.get(0).getFirst_name());
-		return details;
-		
-	}
 	
 	public  ArrayList<Candidate> getProfessionalDetails() {
         ArrayList<Candidate> proffDetails = new ArrayList<Candidate>();

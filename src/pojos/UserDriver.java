@@ -252,30 +252,30 @@ public class UserDriver {
 
 	
 	public static Map<String, String> loginAuth(String userId, String password) {
-		String user ="invalid";
 		Map<String, String> map =new HashMap<>();
 		try {
 			
 			UserCredentials uc = new UserCredentials(userId);
 			char userType = uc.getUserType();
+			User user1 = new User(userId);
+			ArrayList<User> Userdetails = user1.getDetails();
+			User user = Userdetails.get(0);
+			
 			if(uc.checkUserCredentials(password)) {
 				if(userType=='c' || userType == 'C') {
-					System.out.println("enter");
-					user= "candidate";
+					
+					
+					
 					Candidate objC = new Candidate(userId);
-					ArrayList<User> candDetails = objC.getDetails();
-					User cand = candDetails.get(0);
-					
-					
 					ArrayList<Candidate> profDetails = objC.getProfessionalDetails();
 					objC = profDetails.get(0);
 					
 					
-					map.put("first_name", cand.getFirst_name());
-					map.put("last_name", cand.getLast_name());
-					map.put("email", cand.getEmail());
-					map.put("dob", cand.getDob());
-					map.put("mob", cand.getMob_no());
+					map.put("first_name", user.getFirst_name());
+					map.put("last_name", user.getLast_name());
+					map.put("email", user.getEmail());
+					map.put("dob", user.getDob());
+					map.put("mob", user.getMob_no());
 					map.put("userType", "cand");
 					map.put("primary", objC.getPrimarySkills());
 					map.put("secondary", objC.getSecondarySkills());
@@ -283,14 +283,34 @@ public class UserDriver {
 					map.put("qualif", objC.getQualification());
 					map.put("desig", objC.getDesignation());
 				}
-				else if(userType=='t') {
-					user= "technical";
+				else if(userType=='t' || userType=='T') {
+					
+					TechPanel techGuy = new TechPanel(userId);
+					ArrayList<TechPanel> profDetails = techGuy.getProfessionalDetails();
+					techGuy = profDetails.get(0);
+					map.put("first_name", user.getFirst_name());
+					map.put("last_name", user.getLast_name());
+					map.put("email", user.getEmail());
+					map.put("dob", user.getDob());
+					map.put("mob", user.getMob_no());
+					map.put("userType", "tech");
+					map.put("subject", techGuy.getSubjects());
+				}
+				else if(userType=='a' || userType == 'A') {
 					
 				}
-				else if(userType=='a')
-					user = "admin";
-				else if(userType=='h')
-					user = "hr";
+				else if(userType=='h' || userType == 'H') {
+					map.put("first_name", user.getFirst_name());
+					map.put("last_name", user.getLast_name());
+					map.put("email", user.getEmail());
+					map.put("dob", user.getDob());
+					map.put("mob", user.getMob_no());
+					map.put("userType", "hr");
+				}
+				
+			}
+			else {
+				map.put("userType", "invalid");
 			}
 			
 			

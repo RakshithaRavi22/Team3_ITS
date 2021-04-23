@@ -1,6 +1,8 @@
  
 package views;
- 
+
+import java.util.Map;
+
 public class TechPanelFrame extends javax.swing.JFrame {
 	
 	private javax.swing.JLabel dob;
@@ -23,11 +25,25 @@ public class TechPanelFrame extends javax.swing.JFrame {
     private javax.swing.JLabel subjects;
     private javax.swing.JTable tableDetails;
     
-    public TechPanelFrame() {
+    private String first_name;
+	private String last_name;
+	private String email_id;
+	private String dob1;
+	private String mob_no;
+    private String subject;
+    public TechPanelFrame(Map<String, String> li) {
+    	
+    	first_name = li.get("first_name");
+    	last_name = li.get("last_name");
+    	email_id = li.get("email");
+    	dob1 = li.get("dob");
+    	mob_no = li.get("mob");
+    	subject = li.get("subject");
+    	
         initComponents();
     }
     
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "serial" })
     private void initComponents() {
 
         logoutBtn = new javax.swing.JButton();
@@ -66,31 +82,31 @@ public class TechPanelFrame extends javax.swing.JFrame {
         jLabel2.setText("Last Name");
 
         firstName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        firstName.setText("your name");
+        firstName.setText(first_name);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setText("First Name");
 
         lastName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lastName.setText("your name");
+        lastName.setText(last_name);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setText("Email");
 
         email.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        email.setText("your name");
+        email.setText(email_id);
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setText("DOB");
 
         dob.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        dob.setText("your name");
+        dob.setText(dob1);
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel10.setText("Mobile No");
 
         mobile.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        mobile.setText("your name");
+        mobile.setText(mob_no);
 
         noSchedule.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         noSchedule.setText("No schedules available");
@@ -144,7 +160,7 @@ public class TechPanelFrame extends javax.swing.JFrame {
         jLabel12.setText("Subjects");
 
         subjects.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        subjects.setText("your name");
+        subjects.setText(subject);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,7 +274,6 @@ public class TechPanelFrame extends javax.swing.JFrame {
       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TechPanelFrame().setVisible(true);
             }
         });
     }
