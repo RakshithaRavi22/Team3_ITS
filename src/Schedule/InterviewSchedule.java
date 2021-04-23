@@ -74,8 +74,8 @@ public class InterviewSchedule {
 		while(rs.next()) {
 			obj.add(new HRInterview(rs.getString("InterviewID"), 
 					rs.getString("empHRID"),
-					rs.getString("empHRInterviewDate"),
 					rs.getString("empHRInterviewTime"),
+					rs.getString("empHRInterviewDate"),
 					rs.getInt("empHRRating")));
 		}
 		return obj;
@@ -89,10 +89,10 @@ public class InterviewSchedule {
 			obj.add(new CandidateInterview(rs.getString("InterviewID"), 
 					rs.getString("CandidateId"),
 					rs.getString("Subject"),
-					rs.getString("TechInterviewDate"),
 					rs.getString("TechInterviewTime"),
-					rs.getString("empHRInterviewDate"),
-					rs.getString("empHRInterviewTime")));
+					rs.getString("TechInterviewDate"),
+					rs.getString("empHRInterviewTime"),
+					rs.getString("empHRInterviewDate")));
 		}
 		return obj;
 	}
