@@ -1,4 +1,4 @@
-package GUI;
+package views;
 
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import register.UserDriver;
+import pojos.UserDriver;
 
 @SuppressWarnings("serial")
 public class SignUpGUI extends javax.swing.JFrame {

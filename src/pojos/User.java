@@ -1,4 +1,4 @@
-package register;
+package pojos;
 
 public class User {
 	private String first_name;

@@ -1,4 +1,4 @@
-package register;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.util.*;
 
 public class DBConnect {
-	static Connection con;
+	public static Connection con;
 
 
 	static

@@ -1,10 +1,12 @@
-package register;
+package pojos;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import dao.DBConnect;
 
 public class Candidate {
 	
@@ -23,8 +25,7 @@ public class Candidate {
 	private String candidateId;
 	
 	public Candidate(String candidateId) throws SQLException {
-		DBConnect obj = new DBConnect();
-		this.con = obj.con;
+		this.con = DBConnect.con;
 		String query = "select * from ITS_TBL_Candidate where CandidateId="+"\""+candidateId+"\"";
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
