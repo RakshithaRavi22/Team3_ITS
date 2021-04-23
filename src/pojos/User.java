@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +27,7 @@ public class User {
 	private Connection con;
 	private PreparedStatement pre;
 	public User() {
-		
-		
+
 	}
 
 	public User(String userId) throws SQLException {
@@ -254,6 +254,15 @@ public class User {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
+	public ArrayList<User> getDetails() throws SQLException {
+		ArrayList<User> details = new ArrayList<>();
+			details.add(this);
+			
+		return details;
+		
+	}
+	
 	
 	public static void main(String[] args) {
 		try {

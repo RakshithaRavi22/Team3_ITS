@@ -1,5 +1,8 @@
 package pojos;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class HRPanel {
 
 	// private String empHRId; AUTO GENERATED - USERID
@@ -18,6 +21,12 @@ public String getEmpHRName() {
 public void setEmpHRName(String empHRName) {
 	this.empHRName = empHRName;
 }
+public  ArrayList<HRPanel> getProfessionalDetails() throws SQLException {
+	ArrayList<HRPanel> proffDetails = new ArrayList<HRPanel>();
+	proffDetails.add(this);
+	
+	return proffDetails;
 
+}
 
 }

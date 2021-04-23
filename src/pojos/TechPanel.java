@@ -1,5 +1,8 @@
 package pojos;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class TechPanel {
 	
 	// private String techId; AUTO GENERATED USERID 
@@ -25,6 +28,12 @@ public class TechPanel {
 		Subjects = subjects;
 	}
 	
-	
+	public  ArrayList<TechPanel> getProfessionalDetails() throws SQLException {
+		ArrayList<TechPanel> proffDetails = new ArrayList<TechPanel>();
+		proffDetails.add(this);
+		
+		return proffDetails;
+
+	}	
 
 }
