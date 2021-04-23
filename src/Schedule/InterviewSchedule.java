@@ -1,4 +1,4 @@
-package Schedule;
+package schedule;
 
 //notify changes on rating type in sql
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package Schedule;
+package schedule;
 
 public class CandidateInterview {
 	private String InterviewID;
