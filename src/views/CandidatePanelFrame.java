@@ -1,10 +1,42 @@
 
 package views;
 
-public class CandidatePanelFrame extends javax.swing.JFrame {
+import java.util.List;
+import java.util.Map;
 
+import javax.swing.JFrame;
+
+import pojos.User;
+
+public class CandidatePanelFrame extends javax.swing.JFrame {
+	
+	private String first_name;
+	private String last_name;
+	private String email_id;
+	private String dob1;
+	private String mob_no;
+	private String prim_skill;
+	private String sec_skill;
+	private String exp;
+	private String qualif;
+	private String desig;
+		
     public CandidatePanelFrame() {
-        initComponents();
+        
+    }
+    public CandidatePanelFrame(Map<String,String> li) {
+    	first_name = li.get("first_name");
+    	last_name = li.get("last_name");
+    	email_id = li.get("email");
+    	dob1 = li.get("dob");
+    	mob_no = li.get("mob");
+    	prim_skill = li.get("primary");
+    	sec_skill = li.get("secondary");
+    	exp = li.get("experience");
+    	qualif = li.get("qualif");
+    	desig = li.get("desig");
+    	
+    	initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +70,7 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
         logoutBtn.setText("LogOut");
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutBtnActionPerformed(evt);
+                dispose();
             }
         });
 
@@ -49,61 +81,61 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
         jLabel2.setText("Last Name");
 
         firstName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        firstName.setText("your name");
+        firstName.setText(first_name);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setText("First Name");
 
         lastName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lastName.setText("your name");
+        lastName.setText(last_name);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setText("Email");
 
         email.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        email.setText("your name");
+        email.setText(email_id);
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setText("DOB");
 
         dob.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        dob.setText("your name");
+        dob.setText(dob1);
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel10.setText("Mobile No");
 
         mobile.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        mobile.setText("your name");
+        mobile.setText(mob_no);
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel12.setText("Secondary Skills");
 
         primarySkills.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        primarySkills.setText("your name");
+        primarySkills.setText(prim_skill);
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel14.setText("Primary skills");
 
         secondarySkills.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        secondarySkills.setText("your name");
+        secondarySkills.setText(sec_skill);
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel16.setText("Experience ");
 
         experience.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        experience.setText("your name");
+        experience.setText(exp);
 
         jLabel18.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel18.setText("Designation");
 
         qualification.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        qualification.setText("your name");
+        qualification.setText(qualif);
 
         jLabel20.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel20.setText("Qualification");
 
         designation.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        designation.setText("your name");
+        designation.setText(desig);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,7 +250,7 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private javax.swing.JLabel designation;
     private javax.swing.JLabel dob;
     private javax.swing.JLabel email;

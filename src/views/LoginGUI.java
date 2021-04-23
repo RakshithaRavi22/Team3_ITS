@@ -3,14 +3,17 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
+
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import pojos.User;
 import pojos.UserDriver;
 
 public class LoginGUI implements ActionListener {
@@ -77,12 +80,16 @@ public class LoginGUI implements ActionListener {
 				
 				uname = username.getText();
 				psswd = new String(password.getPassword());	
+
 				
-				String userType = UserDriver.loginAuth(uname, psswd);
+				Map<String,String> userType = UserDriver.loginAuth(uname, psswd);
 				
-				if(userType.equals("candidate"))
+				System.out.println(userType);
+				
+				if(userType.get("userType").equals("cand"))
 				{
-					CandidatePanelFrame cp = new CandidatePanelFrame();
+					CandidatePanelFrame cp = new CandidatePanelFrame(userType);
+					
 					cp.setVisible(true);
 					frame.dispose();
 				}

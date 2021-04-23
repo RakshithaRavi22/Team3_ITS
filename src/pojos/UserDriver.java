@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -248,17 +252,42 @@ public class UserDriver {
 	
 	
 	
-	public static String loginAuth(String userId, String password) {
+	public static Map<String, String> loginAuth(String userId, String password) {
 		String user ="invalid";
+		Map<String, String> map =new HashMap<>();
 		try {
 			
 			UserCredentials uc = new UserCredentials(userId);
 			char userType = uc.getUserType();
 			if(uc.checkUserCredentials(password)) {
-				if(userType=='c')
+				if(userType=='c' || userType == 'C') {
+					System.out.println("enter");
 					user= "candidate";
-				else if(userType=='t')
+					Candidate objC = new Candidate(userId);
+					ArrayList<User> candDetails = objC.getDetails();
+					User cand = candDetails.get(0);
+					
+					
+					ArrayList<Candidate> profDetails = objC.getProfessionalDetails();
+					objC = profDetails.get(0);
+					
+					
+					map.put("first_name", cand.getFirst_name());
+					map.put("last_name", cand.getLast_name());
+					map.put("email", cand.getEmail());
+					map.put("dob", cand.getDob());
+					map.put("mob", cand.getMob_no());
+					map.put("userType", "cand");
+					map.put("primary", objC.getPrimarySkills());
+					map.put("secondary", objC.getSecondarySkills());
+					map.put("experience", Float.toString(objC.getExperience()));
+					map.put("qualif", objC.getQualification());
+					map.put("desig", objC.getDesignation());
+				}
+				else if(userType=='t') {
 					user= "technical";
+					
+				}
 				else if(userType=='a')
 					user = "admin";
 				else if(userType=='h')
@@ -270,7 +299,7 @@ public class UserDriver {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return user;
+		return map;
 		
 		
 	}
