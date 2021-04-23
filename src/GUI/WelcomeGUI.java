@@ -98,7 +98,6 @@ public class WelcomeGUI implements ActionListener {
 		        }
 		        //</editor-fold>
 
-//		         Create and display the form 
 		        java.awt.EventQueue.invokeLater(new Runnable() {
 		            public void run() {
 		            	sign = new SignUpGUI();
@@ -111,6 +110,7 @@ public class WelcomeGUI implements ActionListener {
 		
 		else if(e.getSource() == Login) {
 			new LoginGUI();
+			frame.dispose();
 			
 		}
 		
