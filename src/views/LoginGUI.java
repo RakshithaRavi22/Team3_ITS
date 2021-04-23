@@ -54,8 +54,11 @@ public class LoginGUI implements ActionListener {
 		panel2.add(submit);
 		panel2.add(ul);
 		panel1.add(label);
+		
+		
 		outerPanel.add(panel2, BorderLayout.NORTH);
 		outerPanel.add(panel1, BorderLayout.CENTER);
+		
 		frame.add(outerPanel);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,19 +91,28 @@ public class LoginGUI implements ActionListener {
 				
 				if(userType.get("userType").equals("cand"))
 				{
+
+//					CandidatePanelFrame cp = new CandidatePanelFrame();
 					CandidatePanelFrame cp = new CandidatePanelFrame(userType);
-					
+					cp.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					cp.setVisible(true);
 					frame.dispose();
 				}
 				else if(userType.equals("technical")) {
 					TechPanelFrame tp = new TechPanelFrame();
+					tp.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					tp.setVisible(true);
 					frame.dispose();
 				}
 				else if(userType.equals("hr")) {
 					HRPanelFrame hr = new HRPanelFrame();
+					hr.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					hr.setVisible(true);
+					frame.dispose();
+				}
+				else if(userType.equals("admin")) {
+					AdminPanelFrame ad = new AdminPanelFrame();
+					ad.setVisible(true);
 					frame.dispose();
 				}
 				else {
