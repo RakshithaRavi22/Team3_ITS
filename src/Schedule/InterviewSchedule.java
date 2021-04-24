@@ -1,6 +1,7 @@
 package schedule;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,7 +25,7 @@ public class InterviewSchedule {
 	private String result;
 	private int shareResult;
 	
-	
+	private PreparedStatement pre;
 	private String HRinterviewerName;
 	private String TechinterviewerName;
 	private String candidateName;
@@ -56,6 +57,27 @@ public class InterviewSchedule {
 		
 	}
 
+	public InterviewSchedule() {
+		con = DBConnect.con;
+	}
+
+	public boolean updateRating(String rating, String interID, char userType) throws SQLException {
+		if(userType == 't' || userType=='T') {
+			query = "update ITS_TBL_Interview_Schedule set TechRating = ? where InterviewID = ?";
+		}
+		else
+		if(userType == 'h' || userType=='H') {
+			query = "update ITS_TBL_Interview_Schedule set empHRRating = ? where InterviewID = ?";
+		}
+		pre = con.prepareStatement(query);
+		pre.setInt(1,Integer.parseInt(rating));
+		pre.setString(2,interID);
+		int rs = pre.executeUpdate();
+		if(rs>0)
+			return true;
+		return false;
+	}
+	
 	public ArrayList<TechInterview> getTechInfo() throws SQLException {
 		ArrayList<TechInterview> obj = new ArrayList<TechInterview>();
 		
@@ -65,8 +87,7 @@ public class InterviewSchedule {
 			rs1 = st1.executeQuery(query);
 			rs1.next();
 			candidateName = rs1.getString("name");
-			
-			
+
 			obj.add(new TechInterview(rs.getString("InterviewID"),
 					this.getcandidateName(),
 					rs.getString("TechID"),

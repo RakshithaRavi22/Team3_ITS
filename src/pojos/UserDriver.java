@@ -15,7 +15,9 @@ import java.util.regex.Pattern;
 
 import dao.DBConnect;
 import schedule.CandidateInterview;
+import schedule.HRInterview;
 import schedule.InterviewSchedule;
+import schedule.TechInterview;
 import views.SignUpGUI;
 import views.WelcomeGUI;
 
@@ -203,6 +205,42 @@ public class UserDriver {
 
 	}
 	
+	
+	
+	public List<TechInterview> getTechnicalSchedule(String techId) {
+		List<TechInterview> list;
+		try {
+			InterviewSchedule obj = new InterviewSchedule(techId);
+			
+			list = obj.getTechInfo();
+			
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return null;
+		
+	}
+	
+	public List<HRInterview> getHRSchedule(String hrId) {
+		List<HRInterview> list;
+		try {
+			InterviewSchedule obj = new InterviewSchedule(hrId);
+			
+			list = obj.getHRInfo();
+			
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return null;
+		
+	}
+	
+	
+	
 
 	
 	public static Map<String, String> loginAuth(String userId, String password) {
@@ -249,6 +287,7 @@ public class UserDriver {
 					map.put("mob", user.getMob_no());
 					map.put("userType", "tech");
 					map.put("subject", techGuy.getSubjects());
+					map.put("techId", userId);
 				}
 				else if(userType=='a' || userType == 'A') {
 					
@@ -260,6 +299,7 @@ public class UserDriver {
 					map.put("dob", user.getDob());
 					map.put("mob", user.getMob_no());
 					map.put("userType", "hr");
+					map.put("hrId", userId);
 				}
 				
 			}

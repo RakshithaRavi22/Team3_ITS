@@ -21,6 +21,62 @@ public class TechInterview {
 		TechRating = techRating;
 	}
 
+	public String getInterviewID() {
+		return InterviewID;
+	}
+
+	public void setInterviewID(String interviewID) {
+		InterviewID = interviewID;
+	}
+
+	public String getTechID() {
+		return TechID;
+	}
+
+	public void setTechID(String techID) {
+		TechID = techID;
+	}
+
+	public String getCandidateName() {
+		return candidateName;
+	}
+
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
+	}
+
+	public String getSubject() {
+		return Subject;
+	}
+
+	public void setSubject(String subject) {
+		Subject = subject;
+	}
+
+	public String getTechInterviewDate() {
+		return TechInterviewDate;
+	}
+
+	public void setTechInterviewDate(String techInterviewDate) {
+		TechInterviewDate = techInterviewDate;
+	}
+
+	public String getTechInterviewTime() {
+		return TechInterviewTime;
+	}
+
+	public void setTechInterviewTime(String techInterviewTime) {
+		TechInterviewTime = techInterviewTime;
+	}
+
+	public int getTechRating() {
+		return TechRating;
+	}
+
+	public void setTechRating(int techRating) {
+		TechRating = techRating;
+	}
+
 	@Override
 	public String toString() {
 		return "techInterview [InterviewID=" + InterviewID + ", TechID=" + TechID + ", candidateName=" + candidateName
