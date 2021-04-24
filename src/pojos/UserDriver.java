@@ -291,9 +291,12 @@ public class UserDriver {
 					map.put("techId", userId);
 				}
 				else if(userType=='a' || userType == 'A') {
+
 					map.put("mob", user.getMob_no());
 					map.put("userType", "admin");
 //					map.put("hrId", userId);
+					map.put("userType", "admin");
+
 					
 				}
 				else if(userType=='h' || userType == 'H') {
