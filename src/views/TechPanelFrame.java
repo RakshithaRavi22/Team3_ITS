@@ -7,7 +7,7 @@ package views;
 
 import java.util.Map;
 
-import schedule.TechInterview;
+import Schedule.TechInterview;
 
 import java.util.List;
 /**

@@ -91,7 +91,6 @@ public class LoginGUI implements ActionListener {
 				
 				if(userType.get("userType").equals("cand"))
 				{
-
 					CandidatePanelFrame cp = new CandidatePanelFrame(userType);
 					cp.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					cp.setVisible(true);
@@ -109,8 +108,9 @@ public class LoginGUI implements ActionListener {
 					hr.setVisible(true);
 					frame.dispose();
 				}
-				else if(userType.equals("admin")) {
+				else if(userType.get("userType").equals("admin")) {
 					AdminPanelFrame ad = new AdminPanelFrame();
+					ad.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					ad.setVisible(true);
 					frame.dispose();
 				}

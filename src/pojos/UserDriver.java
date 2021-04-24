@@ -14,8 +14,8 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import dao.DBConnect;
-import schedule.CandidateInterview;
-import schedule.InterviewSchedule;
+import Schedule.CandidateInterview;
+import Schedule.InterviewSchedule;
 import views.SignUpGUI;
 import views.WelcomeGUI;
 
@@ -251,6 +251,11 @@ public class UserDriver {
 					map.put("subject", techGuy.getSubjects());
 				}
 				else if(userType=='a' || userType == 'A') {
+					
+					//dummy
+					map.put("dob", user.getDob());
+					map.put("mob", user.getMob_no());
+					map.put("userType", "admin");
 					
 				}
 				else if(userType=='h' || userType == 'H') {
