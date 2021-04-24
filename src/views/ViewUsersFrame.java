@@ -6,14 +6,16 @@ import pojos.UserDriver;
 
 public class ViewUsersFrame extends javax.swing.JFrame {
 	
-	private String[][] users;
+	private String[][] candidates;
 
     /**
      * Creates new form ViewUsersFrame
      */
+	
+	
     public ViewUsersFrame() {
     	
-    	users = new UserDriver().getAllUsers();
+    	candidates = new UserDriver().candidateView();
     	
         initComponents();
     }
@@ -35,9 +37,9 @@ public class ViewUsersFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-           users,
+            candidates,
             new String [] {
-                "User ID", "First Name", "Last Name", "Email", "DOB", "Mobile Number"
+                "Candidate Id", "Name", "Primary skills", "Secondary Skills", "Experience", "Quallification"
             }
         ));
         viewUsersTable.setViewportView(jTable1);

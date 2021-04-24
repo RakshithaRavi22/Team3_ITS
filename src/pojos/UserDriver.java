@@ -215,7 +215,6 @@ public class UserDriver {
 			while(rs1.next())
 				size = rs1.getInt("size");
 			ResultSet rs = st.executeQuery("select * from user");
-			System.out.println(size);
 			userDetails = new String[size][6];
 			int i=0;
 			while(rs.next()) {
@@ -351,6 +350,42 @@ public class UserDriver {
 		
 		
 	}
+	
+	// for candidate view in admin panel
+		public String[][] candidateView(){
+			String[][] candInfo = null;
+			try {	
+				
+				Statement st = con.createStatement();
+				
+				int size = 0;
+				ResultSet rs1 = st.executeQuery("select count(*) size from its_tbl_candidate");
+				while(rs1.next())
+					size = rs1.getInt("size");
+				ResultSet rs = st.executeQuery("select c.CandidateId, concat(u.first_name,' ',u.last_name) as fullname, c.PrimarySkills, "
+						+ "c.SecondarySkills, c.Experience, c.Qualification  from its_tbl_candidate c inner join user u on u.user_id = c.CandidateId");
+				candInfo = new String [size][6];
+				int i = 0;
+				while(rs.next())
+				{
+					candInfo[i][0] = rs.getString("CandidateId");
+					candInfo[i][1] = rs.getString("fullname");
+					candInfo[i][2] = rs.getString("PrimarySkills");
+					candInfo[i][3] = rs.getString("SecondarySkills");
+					candInfo[i][4] = String.valueOf(rs.getFloat("Experience"));
+					candInfo[i][5] = rs.getString("Qualification");
+					i++;
+					
+				}
+				
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			return candInfo;
+
+		}
 	
 	public static void main(String[] args) {
 		new UserDriver();
