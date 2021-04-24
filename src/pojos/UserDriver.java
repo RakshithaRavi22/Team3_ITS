@@ -14,6 +14,8 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import dao.DBConnect;
+import schedule.CandidateInterview;
+import schedule.InterviewSchedule;
 import views.SignUpGUI;
 import views.WelcomeGUI;
 
@@ -40,36 +42,6 @@ public class UserDriver {
 		w.setUserD(this);
 	}
 	
-
-	public boolean delete(String userId) {
-		boolean done = false;
-		
-		try {
-			pre = con.prepareStatement("delete from user where user_id= ?");
-			pre.setString(1, userId);
-			int ra=pre.executeUpdate();
-
-			if(ra>0)
-				System.out.println("User Deleted Successfully..");
-			else
-				System.out.println("User was not deleted..");
-
-			if(ra>0) {
-				System.out.println("User Deleted Successfully..");
-				done = true;
-			}
-			else {
-				System.out.println("User was not deleted..");
-				done = false;
-			}
-			pre.close();
-			sc.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return done;
-	}
 	public int insert()
 	{
 		s=w.getSignUpGUI();
@@ -212,41 +184,23 @@ public class UserDriver {
 											 "invalid";
 								
 	}
-	public boolean updateUser(String userId) {
-		boolean done = false;
-
+	
+	
+	public List<CandidateInterview> getCandidateSchedule(String candId) {
+		List<CandidateInterview> list;
 		try {
-			pre = con.prepareStatement("update user set first_name = ?, last_name = ?, dob = ?, gender = ?, street = ?, location = ?, city = ?, state = ?, zipcode = ?, mobile_no = ?, email = ? where user_id= ?");
-			// Uncomment when done with GUI
+			InterviewSchedule obj = new InterviewSchedule(candId);
 
-//			pre.setString(1, getFirstName());
-//			pre.setString(2, getLastName());
-//			pre.setString(3, getDob());
-//			pre.setString(4, getGender());
-//			pre.setString(5, getStreet());
-//			pre.setString(6, get_location());
-//			pre.setString(7, getCity());
-//			pre.setString(8, get_state());
-//			pre.setString(9, getZipcode());
-//			pre.setString(10, getMobile());
-//			pre.setString(11, getEmail());
-			pre.setString(12, userId);
-			int ra=pre.executeUpdate();
-			if(ra>0) {
-				System.out.println("Users details updated successfully..");
-				done = true;
-			}
-			else {
-				System.out.println("Users details are not updated");
-				done = false;
-			}
-			pre.close();
-			sc.close();
-
+			list = obj.getCandidateInfo();
+			
+			System.out.println(list);
+			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		}
-		return done;
+		return null;
+
 	}
 	
 
@@ -263,8 +217,7 @@ public class UserDriver {
 			
 			if(uc.checkUserCredentials(password)) {
 				if(userType=='c' || userType == 'C') {
-					
-					
+
 					
 					Candidate objC = new Candidate(userId);
 					ArrayList<Candidate> profDetails = objC.getProfessionalDetails();
@@ -282,6 +235,7 @@ public class UserDriver {
 					map.put("experience", Float.toString(objC.getExperience()));
 					map.put("qualif", objC.getQualification());
 					map.put("desig", objC.getDesignation());
+					map.put("candId", userId);
 				}
 				else if(userType=='t' || userType=='T') {
 					

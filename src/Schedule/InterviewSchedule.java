@@ -1,6 +1,5 @@
 package schedule;
 
-//notify changes on rating type in sql
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 
 import dao.DBConnect;
 import pojos.UserCredentials;
-
 
 public class InterviewSchedule {
 	private String interviewId;
@@ -26,39 +24,51 @@ public class InterviewSchedule {
 	private String result;
 	private int shareResult;
 	
+	
+	private String HRinterviewerName;
+	private String TechinterviewerName;
+	private String candidateName;
 	Connection con;
-	DBConnect obj;
 	ResultSet rs;
+	ResultSet rs1;
 	String query;
-	Statement st;
+	Statement st, st1;
 	private char user_type;
 	
 	public InterviewSchedule(String user_id) throws SQLException {
-		obj = new DBConnect();
-		con = obj.con;
+		con = DBConnect.con;
 		
 		UserCredentials uc = new UserCredentials(user_id);
 		user_type = uc.getUserType();
-		if(user_type == 'H') {
-			query = "select * from ITS_TBL_Interview_Schedule where empHRID =" + "\"" + user_id + "\"";
+		if(user_type == 'H' || user_type == 'h') {
+			query = "select * from ITS_TBL_Interview_Schedule  where empHRID = " + "\"" + user_id + "\"";
 		}
-		else if(user_type == 'T') {
+		else if(user_type == 'T' || user_type == 't') {
 			query = "select * from ITS_TBL_Interview_Schedule where TechID =" + "\"" + user_id + "\"";
 		}
-		else if(user_type == 'C') {
+		else if(user_type == 'C' || user_type == 'c') {
 			query = "select * from ITS_TBL_Interview_Schedule where candidateID =" + "\"" + user_id + "\"";
 		}
 		
 		st = con.createStatement();
 		rs = st.executeQuery(query);
 		
+		
 	}
 
-	public ArrayList<TechInterview> getTechInfo() throws SQLException{
+	public ArrayList<TechInterview> getTechInfo() throws SQLException {
 		ArrayList<TechInterview> obj = new ArrayList<TechInterview>();
 		
 		while(rs.next()) {
-			obj.add(new TechInterview(rs.getString("InterviewID"), 
+			query = "select concat(first_name, \' \', last_name) as name from user where user_id = " + "\"" + rs.getString("CandidateID") + "\"";
+			st1 = con.createStatement();
+			rs1 = st1.executeQuery(query);
+			rs1.next();
+			candidateName = rs1.getString("name");
+			
+			
+			obj.add(new TechInterview(rs.getString("InterviewID"),
+					this.getcandidateName(),
 					rs.getString("TechID"),
 					rs.getString("Subject"),
 					rs.getString("TechInterviewDate"),
@@ -72,7 +82,14 @@ public class InterviewSchedule {
 		ArrayList<HRInterview> obj = new ArrayList<HRInterview>();
 		
 		while(rs.next()) {
+			query = "select concat(first_name, \' \', last_name) as name from user where user_id = " + "\"" + rs.getString("CandidateID") + "\"";
+			st1 = con.createStatement();
+			rs1 = st1.executeQuery(query);
+			rs1.next();
+			candidateName = rs1.getString("name");
+			
 			obj.add(new HRInterview(rs.getString("InterviewID"), 
+					this.getcandidateName(),
 					rs.getString("empHRID"),
 					rs.getString("empHRInterviewTime"),
 					rs.getString("empHRInterviewDate"),
@@ -86,13 +103,31 @@ public class InterviewSchedule {
 		ArrayList<CandidateInterview> obj = new ArrayList<CandidateInterview>();
 		
 		while(rs.next()) {
-			obj.add(new CandidateInterview(rs.getString("InterviewID"), 
+			query = "select concat(first_name, \' \', last_name) as name from user where user_id = " + "\"" + rs.getString("TechID") + "\"";
+			st1 = con.createStatement();
+			rs1 = st1.executeQuery(query);
+			if(rs1.next())
+				TechinterviewerName = rs1.getString("name");
+			System.out.println(TechinterviewerName);
+			st1.close();
+			
+			query = "select concat(first_name, \' \', last_name) as name from user where user_id = " + "\"" + rs.getString("empHRID") + "\"";
+			st1 = con.createStatement();
+			rs1 = st1.executeQuery(query);
+			if(rs1.next())
+				HRinterviewerName = rs1.getString("name");
+			
+			
+			obj.add(new CandidateInterview(rs.getString("InterviewID"),
+					this.HRinterviewerName,
+					this.TechinterviewerName,
 					rs.getString("CandidateId"),
 					rs.getString("Subject"),
 					rs.getString("TechInterviewTime"),
 					rs.getString("TechInterviewDate"),
 					rs.getString("empHRInterviewTime"),
 					rs.getString("empHRInterviewDate")));
+					
 		}
 		return obj;
 	}
@@ -207,6 +242,10 @@ public class InterviewSchedule {
 	public int getHrRate() {
 		return hrRate;
 	}
+	
+	public String getcandidateName() {
+		return candidateName;
+	}
 
 
 	public void setHrRate(int hrRate) {
@@ -241,7 +280,7 @@ public class InterviewSchedule {
 			System.out.println(schedule.getCandidateInfo());
 		if(schedule.getUserType() == 'T')
 			System.out.println(schedule.getTechInfo());
+		
 	}
 	
 }
-
