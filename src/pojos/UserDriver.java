@@ -352,42 +352,108 @@ public class UserDriver {
 	}
 	
 	// for candidate view in admin panel
-		public String[][] candidateView(){
-			String[][] candInfo = null;
-			try {	
+	public String[][] candidateView(){
+		String[][] candInfo = null;
+		try {	
+			
+			Statement st = con.createStatement();
+			
+			int size = 0;
+			ResultSet rs1 = st.executeQuery("select count(*) size from its_tbl_candidate");
+			while(rs1.next())
+				size = rs1.getInt("size");
+			ResultSet rs = st.executeQuery("select c.CandidateId, concat(u.first_name,' ',u.last_name) as fullname, c.PrimarySkills, "
+					+ "c.SecondarySkills, c.Experience, c.Qualification  from its_tbl_candidate c inner join user u on u.user_id = c.CandidateId");
+			candInfo = new String [size][6];
+			int i = 0;
+			while(rs.next())
+			{
+				candInfo[i][0] = rs.getString("CandidateId");
+				candInfo[i][1] = rs.getString("fullname");
+				candInfo[i][2] = rs.getString("PrimarySkills");
+				candInfo[i][3] = rs.getString("SecondarySkills");
+				candInfo[i][4] = String.valueOf(rs.getFloat("Experience"));
+				candInfo[i][5] = rs.getString("Qualification");
+				i++;
 				
-				Statement st = con.createStatement();
-				
-				int size = 0;
-				ResultSet rs1 = st.executeQuery("select count(*) size from its_tbl_candidate");
-				while(rs1.next())
-					size = rs1.getInt("size");
-				ResultSet rs = st.executeQuery("select c.CandidateId, concat(u.first_name,' ',u.last_name) as fullname, c.PrimarySkills, "
-						+ "c.SecondarySkills, c.Experience, c.Qualification  from its_tbl_candidate c inner join user u on u.user_id = c.CandidateId");
-				candInfo = new String [size][6];
-				int i = 0;
-				while(rs.next())
-				{
-					candInfo[i][0] = rs.getString("CandidateId");
-					candInfo[i][1] = rs.getString("fullname");
-					candInfo[i][2] = rs.getString("PrimarySkills");
-					candInfo[i][3] = rs.getString("SecondarySkills");
-					candInfo[i][4] = String.valueOf(rs.getFloat("Experience"));
-					candInfo[i][5] = rs.getString("Qualification");
-					i++;
-					
-				}
-				
-				
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
 			}
-			return candInfo;
-
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
 		}
+		return candInfo;
+
+	}
 	
+	// for technical interviewer view in admin panel
+	public String[][] techView(){
+		String[][] techInfo = null;
+		try {	
+			
+			Statement st = con.createStatement();
+			
+			int size = 0;
+			ResultSet rs1 = st.executeQuery("select count(*) size from its_tbl_techpanel");
+			while(rs1.next())
+				size = rs1.getInt("size");
+			ResultSet rs = st.executeQuery("select * from its_tbl_techpanel");
+			techInfo = new String [size][3];
+			int i = 0;
+			while(rs.next())
+			{
+				techInfo[i][0] = rs.getString("techId");
+				techInfo[i][1] = rs.getString("techName");
+				techInfo[i][2] = rs.getString("Subjects");
+				i++;
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return techInfo;
+
+	}	
+	
+	// for hr interviewer view in admin panel
+	public String[][] hrView(){
+		String[][] hrInfo = null;
+		try {	
+			
+			Statement st = con.createStatement();
+			
+			int size = 0;
+			ResultSet rs1 = st.executeQuery("select count(*) size from its_tbl_hrpanel");
+			while(rs1.next())
+				size = rs1.getInt("size");
+			ResultSet rs = st.executeQuery("select * from its_tbl_hrpanel");
+			hrInfo = new String [size][2];
+			int i = 0;
+			while(rs.next())
+			{
+				hrInfo[i][0] = rs.getString("empHRId");
+				hrInfo[i][1] = rs.getString("empHRName");
+				i++;
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return hrInfo;
+
+	}	
+
+		
 	public static void main(String[] args) {
+		
 		new UserDriver();
+		
 	}
 }
