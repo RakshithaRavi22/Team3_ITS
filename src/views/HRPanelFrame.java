@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import pojos.UserDriver;
 import Schedule.HRInterview;
 import Schedule.InterviewSchedule;
-import Schedule.TechInterview;
 
 /**
  *
