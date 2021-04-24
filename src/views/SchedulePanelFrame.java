@@ -36,6 +36,8 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
         updateInterviewBtn = new javax.swing.JButton();
         deleteInterviewBtn = new javax.swing.JButton();
         homeBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        interviewId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,10 +58,25 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(schedultTable);
 
         addIntervviewBtn.setText("Add Interview");
+        addIntervviewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addIntervviewBtnActionPerformed(evt);
+            }
+        });
 
         updateInterviewBtn.setText("Update Interview");
+        updateInterviewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateInterviewBtnActionPerformed(evt);
+            }
+        });
 
         deleteInterviewBtn.setText("Delete Interview");
+        deleteInterviewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteInterviewBtnActionPerformed(evt);
+            }
+        });
 
         homeBtn.setText("Go Back");
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +84,9 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
                 homeBtnActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setText("Enter interview ID");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,7 +103,9 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
                             .addComponent(updateInterviewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addIntervviewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(deleteInterviewBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))))
+                            .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(interviewId))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -96,7 +118,11 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addIntervviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
+                        .addComponent(interviewId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
                         .addComponent(updateInterviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(deleteInterviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,7 +139,26 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
     	adminPanel.setVisible(true);
 		adminPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		dispose();
-	}                                       
+	}                                      
+
+    private void updateInterviewBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+    	UpdateScheduleFrame updateSchedule = new UpdateScheduleFrame();
+    	updateSchedule.setVisible(true);
+		updateSchedule.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		dispose();
+    }                                                  
+
+    private void deleteInterviewBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        // TODO add your handling code here:
+    }                                                  
+
+    private void addIntervviewBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+    	AddScheduleFrame addSchedule = new AddScheduleFrame();
+    	addSchedule.setVisible(true);
+		addSchedule.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		dispose();
+		
+    }                                                
     
     
     /**
@@ -155,7 +200,9 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
     private javax.swing.JButton addIntervviewBtn;
     private javax.swing.JButton deleteInterviewBtn;
     private javax.swing.JButton homeBtn;
+    private javax.swing.JTextField interviewId;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable schedultTable;
     private javax.swing.JButton updateInterviewBtn;
