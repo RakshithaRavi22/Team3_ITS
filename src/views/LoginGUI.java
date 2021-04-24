@@ -1,15 +1,20 @@
-package GUI;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
+
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import pojos.User;
+import pojos.UserDriver;
 
 public class LoginGUI implements ActionListener {
 
@@ -21,6 +26,7 @@ public class LoginGUI implements ActionListener {
 	JButton submit;
 	String uname, psswd;
 	
+	
 	public LoginGUI() {
 		
 		frame = new JFrame("Login");
@@ -30,9 +36,8 @@ public class LoginGUI implements ActionListener {
 		submit = new JButton("Submit");
 		submit.addActionListener(this);
 		
-		label = new JLabel("Choose User Type");
-		String[] users = {"Admin", "Tech", "HR" };
-		JComboBox<String> userType = new JComboBox<String>(users);
+		label = new JLabel("");
+
 		
 		label1 = new JLabel("Enter UserID and Password");
 		username = new JTextField(10);
@@ -40,17 +45,20 @@ public class LoginGUI implements ActionListener {
 		
 		ul = new JLabel();
 		
+		
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		panel1.add(label);
-		panel1.add(userType);
+
 		panel2.add(label1);
 		panel2.add(username);
 		panel2.add(password);
 		panel2.add(submit);
 		panel2.add(ul);
+		panel1.add(label);
 		
-		outerPanel.add(panel1, BorderLayout.NORTH);
-		outerPanel.add(panel2, BorderLayout.CENTER);
+		
+		outerPanel.add(panel2, BorderLayout.NORTH);
+		outerPanel.add(panel1, BorderLayout.CENTER);
+		
 		frame.add(outerPanel);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,14 +77,48 @@ public class LoginGUI implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 //		String s = (String) e.getSource();
-		if(username.getText().length() != 0 && password.getPassword().length != 0) {
-			
+		if(username.getText().length() != 0 && password.getPassword().length != 0) 
+		{	
 			if (e.getSource() == submit) {
-				username.setText("");
-				password.setText("");
+				
 				uname = username.getText();
-				psswd = new String(password.getPassword());
-				frame.dispose();
+				psswd = new String(password.getPassword());	
+
+				
+				Map<String,String> userType = UserDriver.loginAuth(uname, psswd);
+				
+				System.out.println(userType);
+				
+				if(userType.get("userType").equals("cand"))
+				{
+
+					CandidatePanelFrame cp = new CandidatePanelFrame(userType);
+					cp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					cp.setVisible(true);
+					frame.dispose();
+				}
+				else if(userType.get("userType").equals("tech")) {
+					TechPanelFrame tp = new TechPanelFrame(userType);
+					tp.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					tp.setVisible(true);
+					frame.dispose();
+				}
+				else if(userType.get("userType").equals("hr")) {
+					HRPanelFrame hr = new HRPanelFrame(userType);
+					hr.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					hr.setVisible(true);
+					frame.dispose();
+				}
+				else if(userType.equals("admin")) {
+					AdminPanelFrame ad = new AdminPanelFrame();
+					ad.setVisible(true);
+					frame.dispose();
+				}
+				else {
+					label.setText("Invalid User");
+				}
+				
+				
 			}			
 		}
 		else ul.setText("Enter all fields");
