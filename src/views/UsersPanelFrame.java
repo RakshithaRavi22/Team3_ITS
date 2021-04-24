@@ -5,7 +5,11 @@
  */
 package views;
 
+import java.util.Arrays;
+
 import javax.swing.JFrame;
+
+import pojos.UserDriver;
 
 /**
  *
@@ -16,7 +20,10 @@ public class UsersPanelFrame extends javax.swing.JFrame {
     /**
      * Creates new form UsersPanelFrame
      */
+	private String[][] users;
     public UsersPanelFrame() {
+    	users = new UserDriver().getAllUsers();
+    	System.out.println(Arrays.deepToString(users));
         initComponents();
     }
 
@@ -44,15 +51,10 @@ public class UsersPanelFrame extends javax.swing.JFrame {
         jLabel1.setText("Users Database");
 
         userTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+        		users,
+                new String [] {
+                    "User ID", "First Name", "Last Name", "Email", "DOB", "Mobile Number"
+                }
         ));
         jScrollPane1.setViewportView(userTable);
 

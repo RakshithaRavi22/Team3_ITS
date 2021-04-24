@@ -2,12 +2,19 @@ package views;
 
 import javax.swing.JFrame;
 
+import pojos.UserDriver;
+
 public class ViewUsersFrame extends javax.swing.JFrame {
+	
+	private String[][] users;
 
     /**
      * Creates new form ViewUsersFrame
      */
     public ViewUsersFrame() {
+    	
+    	users = new UserDriver().getAllUsers();
+    	
         initComponents();
     }
 
@@ -28,14 +35,9 @@ public class ViewUsersFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
+           users,
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "User ID", "First Name", "Last Name", "Email", "DOB", "Mobile Number"
             }
         ));
         viewUsersTable.setViewportView(jTable1);

@@ -206,6 +206,34 @@ public class UserDriver {
 	}
 	
 	
+	public String[][] getAllUsers() {		
+		String[][] userDetails = null;
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs1 = st.executeQuery("select count(*) size from user");
+			int size = 0;
+			while(rs1.next())
+				size = rs1.getInt("size");
+			ResultSet rs = st.executeQuery("select * from user");
+			System.out.println(size);
+			userDetails = new String[size][6];
+			int i=0;
+			while(rs.next()) {
+				userDetails[i][0] = rs.getString("user_id");
+				userDetails[i][1] = rs.getString("first_name");
+				userDetails[i][2] = rs.getString("last_name");
+				userDetails[i][3] = rs.getString("email");
+				userDetails[i][4] = rs.getString("dob");
+				userDetails[i][5] = rs.getString("mobile_no");
+				i++;
+			}		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return userDetails;	
+	}
+	
 	
 	public List<TechInterview> getTechnicalSchedule(String techId) {
 		List<TechInterview> list;
