@@ -290,6 +290,8 @@ public class UserDriver {
 					map.put("techId", userId);
 				}
 				else if(userType=='a' || userType == 'A') {
+					map.put("userType", "admin");
+					
 					
 				}
 				else if(userType=='h' || userType == 'H') {
