@@ -47,6 +47,7 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
     	desig = li.get("desig");
     	candId = li.get("candId");
     	List<CandidateInterview> list = new UserDriver().getCandidateSchedule(candId);
+    	
     	if(list.size()==0)
     		noSchedule.setVisible(true);
     	else {
