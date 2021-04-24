@@ -7,10 +7,12 @@ package views;
 
 import java.util.Map;
 
+import javax.swing.JLabel;
+
 import pojos.UserDriver;
-import schedule.CandidateInterview;
-import schedule.InterviewSchedule;
-import schedule.TechInterview;
+import Schedule.CandidateInterview;
+import Schedule.InterviewSchedule;
+import Schedule.TechInterview;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,9 +22,7 @@ import java.util.List;
  */
 public class TechPanelFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TechPanelFrame
-     */
+   
     private String first_name;
 	private String last_name;
 	private String email_id;
@@ -43,7 +43,8 @@ public class TechPanelFrame extends javax.swing.JFrame {
     	techId = li.get("techId");
     	userType = li.get("userType");
     	List<TechInterview> scheduleDetails = new UserDriver().getTechnicalSchedule(techId);
-    	if(scheduleDetails.size()==0)
+    	
+    	if(scheduleDetails==null)
     		noSchedule.setVisible(true);
     	else {
     		schedules = new String[scheduleDetails.size()][4];
@@ -94,6 +95,7 @@ public class TechPanelFrame extends javax.swing.JFrame {
         rating = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDetails = new javax.swing.JTable();
+        messageLabel = new JLabel();
 		noSchedule.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -212,6 +214,9 @@ public class TechPanelFrame extends javax.swing.JFrame {
         tableDetails.setGridColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(tableDetails);
 
+        messageLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        messageLabel.setText("Feedback received");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,7 +251,7 @@ public class TechPanelFrame extends javax.swing.JFrame {
                                         .addComponent(dob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(mobile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -257,13 +262,16 @@ public class TechPanelFrame extends javax.swing.JFrame {
                                             .addComponent(interviewId)
                                             .addComponent(rating, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(49, 49, 49)
-                                        .addComponent(feedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(feedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(messageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(88, 88, 88)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(schedulePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(271, 271, 271)
                         .addComponent(noSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,7 +323,8 @@ public class TechPanelFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(feedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(feedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(messageLabel))))
                 .addGap(178, 178, 178))
         );
 
@@ -392,5 +401,6 @@ public class TechPanelFrame extends javax.swing.JFrame {
     private javax.swing.JPanel schedulePanel;
     private javax.swing.JLabel subjects;
     private javax.swing.JTable tableDetails;
+    private JLabel messageLabel;
     // End of variables declaration//GEN-END:variables
 }

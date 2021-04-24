@@ -136,7 +136,10 @@ public class UsersPanelFrame extends javax.swing.JFrame {
     }                                           
 
     private void updateUserBtnActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+    	UpdateUserFrame updateUser = new UpdateUserFrame();
+    	updateUser.setVisible(true);
+		updateUser.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		dispose();
     }                                             
 
     private void deleteUserBtnActionPerformed(java.awt.event.ActionEvent evt) {                                              

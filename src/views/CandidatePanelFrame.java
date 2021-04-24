@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import pojos.UserDriver;
-import schedule.CandidateInterview;
+import Schedule.CandidateInterview;
 
 /**
  *
@@ -48,7 +48,7 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
     	candId = li.get("candId");
     	List<CandidateInterview> list = new UserDriver().getCandidateSchedule(candId);
     	
-    	if(list.size()==0)
+    	if(list==null)
     		noSchedule.setVisible(true);
     	else {
     		schedules = new String[list.size()][4];

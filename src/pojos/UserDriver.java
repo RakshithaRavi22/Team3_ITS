@@ -14,10 +14,10 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import dao.DBConnect;
-import schedule.CandidateInterview;
-import schedule.HRInterview;
-import schedule.InterviewSchedule;
-import schedule.TechInterview;
+import Schedule.CandidateInterview;
+import Schedule.HRInterview;
+import Schedule.InterviewSchedule;
+import Schedule.TechInterview;
 import views.SignUpGUI;
 import views.WelcomeGUI;
 
@@ -235,6 +235,7 @@ public class UserDriver {
 			e.printStackTrace();
 			
 		}
+//		return new ArrayList();
 		return null;
 		
 	}
@@ -290,6 +291,9 @@ public class UserDriver {
 					map.put("techId", userId);
 				}
 				else if(userType=='a' || userType == 'A') {
+					map.put("mob", user.getMob_no());
+					map.put("userType", "admin");
+//					map.put("hrId", userId);
 					
 				}
 				else if(userType=='h' || userType == 'H') {

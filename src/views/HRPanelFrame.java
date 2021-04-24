@@ -9,10 +9,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JLabel;
+
 import pojos.UserDriver;
-import schedule.HRInterview;
-import schedule.InterviewSchedule;
-import schedule.TechInterview;
+import Schedule.HRInterview;
+import Schedule.InterviewSchedule;
+import Schedule.TechInterview;
 
 /**
  *
@@ -42,8 +44,14 @@ public class HRPanelFrame extends javax.swing.JFrame {
     	hrId = li.get("hrId");
     	userType = li.get("userType");
     	List<HRInterview> scheduleDetails = new UserDriver().getHRSchedule(hrId);
-    	if(scheduleDetails.size()==0)
+    	
+    	System.out.println(scheduleDetails);
+    	
+    	if(scheduleDetails == null) {
+//    		System.out.println("HRPanel");
     		noSchedule.setVisible(true);
+    		tableDetails.setVisible(false);
+    	}
     	else {
     		schedules = new String[scheduleDetails.size()][4];
     		int i=0;
@@ -92,6 +100,7 @@ public class HRPanelFrame extends javax.swing.JFrame {
         interviewId = new javax.swing.JTextField();
         rating = new javax.swing.JTextField();
         feedbackBtn = new javax.swing.JButton();
+        messageLabel =new JLabel();
 		noSchedule.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -206,6 +215,9 @@ public class HRPanelFrame extends javax.swing.JFrame {
              }
         });
 
+        messageLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        messageLabel.setText("Feedback Received");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -245,7 +257,9 @@ public class HRPanelFrame extends javax.swing.JFrame {
                                             .addComponent(interviewId)
                                             .addComponent(rating, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(49, 49, 49)
-                                        .addComponent(feedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(feedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(42, 42, 42)
+                                        .addComponent(messageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(schedulePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3)
@@ -303,7 +317,8 @@ public class HRPanelFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(rating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(feedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(feedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(messageLabel))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -378,5 +393,6 @@ public class HRPanelFrame extends javax.swing.JFrame {
     private javax.swing.JTextField rating;
     private javax.swing.JPanel schedulePanel;
     private javax.swing.JTable tableDetails;
+    private JLabel messageLabel;
     // End of variables declaration//GEN-END:variables
 }
