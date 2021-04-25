@@ -2,7 +2,7 @@ package views;
 
 import javax.swing.JFrame;
 
-import pojos.UserDriver;
+import driver.UserDriver;
 
 public class ViewUsersFrame extends javax.swing.JFrame {
 

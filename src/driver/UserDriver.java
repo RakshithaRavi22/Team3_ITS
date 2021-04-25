@@ -1,4 +1,4 @@
-package pojos;
+package driver;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +14,10 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import dao.DBConnect;
+import pojos.Candidate;
+import pojos.TechPanel;
+import pojos.User;
+import pojos.UserCredentials;
 import Schedule.CandidateInterview;
 import Schedule.HRInterview;
 import Schedule.InterviewSchedule;

@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import pojos.UserDriver;
+import driver.UserDriver;
 
 public class WelcomeGUI implements ActionListener {
 	JLabel label;

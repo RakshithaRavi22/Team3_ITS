@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import pojos.UserDriver;
+import driver.UserDriver;
 
 @SuppressWarnings("serial")
 public class SignUpGUI extends javax.swing.JFrame {

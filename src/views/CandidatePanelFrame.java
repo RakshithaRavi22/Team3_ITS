@@ -5,12 +5,11 @@
  */
 package views;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import pojos.UserDriver;
 import Schedule.CandidateInterview;
+import driver.UserDriver;
 
 /**
  *
@@ -33,7 +32,6 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
     public CandidatePanelFrame() {
         
     }
-
     public CandidatePanelFrame(Map<String,String> li) {
     	first_name = li.get("first_name");
     	last_name = li.get("last_name");
@@ -48,7 +46,7 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
     	candId = li.get("candId");
     	List<CandidateInterview> list = new UserDriver().getCandidateSchedule(candId);
     	
-    	if(list==null)
+    	if(list.size()==0)
     		noSchedule.setVisible(true);
     	else {
     		schedules = new String[list.size()][4];

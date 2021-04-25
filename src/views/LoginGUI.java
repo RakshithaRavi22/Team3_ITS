@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import driver.UserDriver;
 import pojos.User;
-import pojos.UserDriver;
 
 public class LoginGUI implements ActionListener {
 

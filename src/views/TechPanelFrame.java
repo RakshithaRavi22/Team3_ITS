@@ -9,10 +9,10 @@ import java.util.Map;
 
 import javax.swing.JLabel;
 
-import pojos.UserDriver;
 import Schedule.CandidateInterview;
 import Schedule.InterviewSchedule;
 import Schedule.TechInterview;
+import driver.UserDriver;
 
 import java.sql.SQLException;
 import java.util.List;
