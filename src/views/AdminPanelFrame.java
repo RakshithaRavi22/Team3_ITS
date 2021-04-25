@@ -143,7 +143,7 @@ public class AdminPanelFrame extends javax.swing.JFrame {
     }                                            
 
     private void viewHrBtnActionPerformed(java.awt.event.ActionEvent evt) {                                          
-    	ViewUsersFrame viewPanel = new ViewUsersFrame();
+    	ViewUsersFrame viewPanel = new ViewUsersFrame("hr");
     	viewPanel.setVisible(true);
 		viewPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
@@ -159,7 +159,7 @@ public class AdminPanelFrame extends javax.swing.JFrame {
 	}                                            
 
     private void viewCandidatesBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-    	ViewUsersFrame viewPanel = new ViewUsersFrame();
+    	ViewUsersFrame viewPanel = new ViewUsersFrame("candidate");
     	viewPanel.setVisible(true);
 		viewPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
@@ -167,7 +167,7 @@ public class AdminPanelFrame extends javax.swing.JFrame {
     }                                                 
 
     private void viewTechBtnActionPerformed(java.awt.event.ActionEvent evt) {                                            
-    	ViewUsersFrame viewPanel = new ViewUsersFrame();
+    	ViewUsersFrame viewPanel = new ViewUsersFrame("tech");
     	viewPanel.setVisible(true);
 		viewPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		

@@ -5,18 +5,32 @@ import javax.swing.JFrame;
 import pojos.UserDriver;
 
 public class ViewUsersFrame extends javax.swing.JFrame {
-	
-	private String[][] candidates;
 
     /**
      * Creates new form ViewUsersFrame
      */
+	private String[][] users;
+	private String[] columns;
 	
-	
-    public ViewUsersFrame() {
-    	
-    	candidates = new UserDriver().candidateView();
-    	
+    public ViewUsersFrame(String user) {
+    	if(user.equals("candidate")) {
+    			users = new UserDriver().candidateView();
+    			columns = new String [] {
+    	                "Candidate Id", "Name", "Primary skills", "Secondary Skills", "Experience", "Quallification"
+                };
+    	}
+    	else if(user.equals("hr")) {
+    		users = new UserDriver().hrView();
+    	columns = new String [] {
+                "HR Id", "HR Name"
+        	};
+    	}
+    	else if(user.equals("tech")) {
+    		users = new UserDriver().techView();
+    		columns = new String [] {
+                    "Tech Id", "Tech Name", "Subject"
+            	};
+    	}
         initComponents();
     }
 
@@ -37,10 +51,8 @@ public class ViewUsersFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            candidates,
-            new String [] {
-                "Candidate Id", "Name", "Primary skills", "Secondary Skills", "Experience", "Quallification"
-            }
+            users,
+            columns
         ));
         viewUsersTable.setViewportView(jTable1);
 
@@ -120,7 +132,7 @@ public class ViewUsersFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewUsersFrame().setVisible(true);
+//                new ViewUsersFrame().setVisible(true);
             }
         });
     }
