@@ -43,7 +43,7 @@ public class TechPanelFrame extends javax.swing.JFrame {
     	techId = li.get("techId");
     	userType = li.get("userType");
     	List<TechInterview> scheduleDetails = new UserDriver().getTechnicalSchedule(techId);
-    	
+    	initComponents();
     	if(scheduleDetails==null)
     		noSchedule.setVisible(true);
     	else {
@@ -58,7 +58,7 @@ public class TechPanelFrame extends javax.swing.JFrame {
     		}
     	}
     	
-    	initComponents();
+
     	messageLabel.setVisible(false);
     }
     

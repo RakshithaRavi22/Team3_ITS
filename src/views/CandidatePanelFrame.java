@@ -45,7 +45,7 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
     	desig = li.get("desig");
     	candId = li.get("candId");
     	List<CandidateInterview> list = new UserDriver().getCandidateSchedule(candId);
-    	
+    	initComponents();
     	if(list.size()==0)
     		noSchedule.setVisible(true);
     	else {
@@ -73,7 +73,7 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
     	}
     	}
 
-    	initComponents();
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
