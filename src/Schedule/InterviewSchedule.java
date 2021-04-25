@@ -156,7 +156,7 @@ public boolean setAllDetails(Map<String,String> map) {
 			subject = map.get("Subject");
 		if(map.get("TechID") != null)
 			techId = map.get("TechID");
-		if(map.get("TechInterviewDate") != null)
+		if(map.get("TechInterviewDate") != null && !map.get("TechInterviewDate").equals(""))
 			techInDate = map.get("TechInterviewDate");
 		if(map.get("TechInterviewTime") != null)
 			techInTime = map.get("TechInterviewTime");
@@ -164,7 +164,7 @@ public boolean setAllDetails(Map<String,String> map) {
 			techRate = Integer.parseInt(map.get("TechRating"));
 		if(map.get("empHRID") != null)
 			hrId = map.get("empHRID");
-		if(map.get("empHRInterviewDate") != null)
+		if(map.get("empHRInterviewDate") != null && !map.get("empHRInterviewDate").equals(""))
 			hrInDate = map.get("empHRInterviewDate");
 		if(map.get("empHRInterviewTime") != null)
 			hrInTime = (map.get("empHRInterviewTime"));

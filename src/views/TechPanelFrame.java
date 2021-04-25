@@ -58,7 +58,8 @@ public class TechPanelFrame extends javax.swing.JFrame {
     		}
     	}
     	
-        initComponents();
+    	initComponents();
+    	messageLabel.setVisible(false);
     }
     
 
@@ -172,13 +173,16 @@ public class TechPanelFrame extends javax.swing.JFrame {
                 try {
 					boolean isUpdated = is.updateRating(rating.getText(), interviewId.getText(), userType.charAt(0));
 					if(isUpdated) {
-						
-						//add textfield for successfully updated
-					}
-					else
-					{
-						//error 
-					}
+ 						
+ 						//add textfield for successfully updated
+ 						messageLabel.setVisible(true);
+ 					}
+ 					else
+ 					{
+ 						//error 
+ 						messageLabel.setText("Due to some reason feedback was not recieved");
+ 						messageLabel.setVisible(true);
+ 					}
 					
 				} catch (SQLException e) {
 					e.printStackTrace();

@@ -5,7 +5,16 @@
  */
 package views;
 
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JFrame;
+
+import Schedule.InterviewSchedule;
+import pojos.HRPanel;
+import pojos.TechPanel;
+import pojos.User;
 
 /**
  *
@@ -14,10 +23,52 @@ import javax.swing.JFrame;
 public class UpdateScheduleFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form UpdateScheduleFrame
-     */
-    public UpdateScheduleFrame() {
+     * Creates new form UpdateScheduleFrame 
+     * 
+     * */
+	String techIntName="";
+	String hrIntName="";
+	UpdateScheduleFrame(){initComponents();}
+	InterviewSchedule inter;
+	public UpdateScheduleFrame(String interviewId) {
         initComponents();
+        messageLabel.setVisible(false);
+    	try {
+			inter = new InterviewSchedule("bo1006", interviewId);
+			candidateName.setText(new User(inter.getCandidateId()).getFirst_name());
+			candidateName.setEditable(false);
+			candidateId1.setText(inter.getCandidateId());
+			candidateId1.setEditable(false);
+			subject.setText(inter.getSubject());
+			
+			
+			techDate1.setText(inter.getTechInDate());
+			techTime.setText(inter.getTechInTime());
+			
+			hrDate.setText(inter.getHrInDate());
+			hrTime.setText(inter.getHrInTime());
+			
+			if(inter.getTechId()!=null) {
+				techIntName = new TechPanel(inter.getTechId()).getTechName();
+				techName.setText(techIntName);
+				techName.setEditable(false);
+				techId.setText(inter.getTechId());
+				techId.setEditable(false);
+			}
+			if(inter.getHrId()!=null) {
+				hrIntName = new HRPanel(inter.getHrId()).getEmpHRName();
+				hrName.setText(hrIntName);
+				hrName.setEditable(false);
+				hrId.setText(inter.getHrId());
+				hrId.setEditable(false);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	
+
     }
 
     /**
@@ -287,10 +338,42 @@ public class UpdateScheduleFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_techNameActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-    	SchedulePanelFrame sPanel = new SchedulePanelFrame();
-    	sPanel.setVisible(true);
-		sPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		dispose();
+    	
+    	Map<String,String> map = new HashMap<>();
+    	
+    	map.put("CandidateID", candidateId1.getText());
+    	map.put("Subject", subject.getText());
+    	map.put("TechID", techId.getText());
+    	map.put("TechInterviewDate", techDate1.getText());
+    	map.put("TechInterviewTime", techTime.getText());
+    	map.put("TechRating", null);
+    	map.put("empHRID", hrId.getText());
+    	map.put("empHRInterviewDate", hrDate.getText());
+    	map.put("empHRInterviewTime", hrTime.getText());
+    	map.put("empHRRating", null);
+    	map.put("Result", null);
+    	map.put("ShareResult", null);
+    	
+    	if(inter.setAllDetails(map))
+    	{
+    		messageLabel.setVisible(true);
+    		
+    		try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    		SchedulePanelFrame sPanel = new SchedulePanelFrame();
+        	sPanel.setVisible(true);
+    		sPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    		dispose();
+    	}
+    	else {
+    		messageLabel.setText("Not updated");
+    		messageLabel.setVisible(true);
+    	}
+    	
+    	
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void hrDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hrDateActionPerformed

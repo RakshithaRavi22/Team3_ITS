@@ -44,7 +44,6 @@ public class HRPanelFrame extends javax.swing.JFrame {
     	userType = li.get("userType");
     	List<HRInterview> scheduleDetails = new UserDriver().getHRSchedule(hrId);
     	
-    	System.out.println(scheduleDetails);
     	
     	if(scheduleDetails == null) {
 //    		System.out.println("HRPanel");
@@ -65,7 +64,7 @@ public class HRPanelFrame extends javax.swing.JFrame {
     	
     	
     	initComponents();
-
+    	messageLabel.setVisible(false);
     }
 
     /**
@@ -201,10 +200,13 @@ public class HRPanelFrame extends javax.swing.JFrame {
  					if(isUpdated) {
  						
  						//add textfield for successfully updated
+ 						messageLabel.setVisible(true);
  					}
  					else
  					{
  						//error 
+ 						messageLabel.setText("Due to some reason feedback was not recieved");
+ 						messageLabel.setVisible(true);
  					}
  					
  				} catch (SQLException e) {

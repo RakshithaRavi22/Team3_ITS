@@ -11,6 +11,7 @@ public class AddScheduleFrame extends javax.swing.JFrame {
  
     public AddScheduleFrame() {
         initComponents();
+        addLabel.setVisible(false);
     }
  
     @SuppressWarnings("unchecked")
@@ -105,8 +106,24 @@ public class AddScheduleFrame extends javax.swing.JFrame {
 					boolean isInserted = schedule.insert();
 					
 					if(isInserted)
-						System.out.println("inserted");
-					else System.out.println("not inserted");
+					{
+						addLabel.setVisible(true);
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+				    	SchedulePanelFrame sPanel = new SchedulePanelFrame();
+				    	sPanel.setVisible(true);
+						sPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
+						
+						dispose();
+					}
+					else {
+						addLabel.setText("Not inserted");
+						addLabel.setVisible(true);
+						
+					}
 					
 				} catch (SQLException e) {
 					e.printStackTrace();

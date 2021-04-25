@@ -5,6 +5,10 @@
  */
 package views;
 
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JFrame;
 
 import Schedule.InterviewSchedule;
@@ -145,15 +149,32 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
 		dispose();
 	}                                      
 
-    private void updateInterviewBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-    	UpdateScheduleFrame updateSchedule = new UpdateScheduleFrame();
+    private void updateInterviewBtnActionPerformed(java.awt.event.ActionEvent evt) {     
+    	UpdateScheduleFrame updateSchedule = new UpdateScheduleFrame(interviewId.getText());
     	updateSchedule.setVisible(true);
 		updateSchedule.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		dispose();
     }                                                  
 
-    private void deleteInterviewBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        // TODO add your handling code here:
+    private void deleteInterviewBtnActionPerformed(java.awt.event.ActionEvent evt) {    
+    	InterviewSchedule schedule;
+		try {
+			schedule = new InterviewSchedule("bob123", interviewId.getText());
+			if(schedule.delete())
+			{
+		    	SchedulePanelFrame sPanel = new SchedulePanelFrame();
+		    	sPanel.setVisible(true);
+				sPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				
+				dispose();
+			}
+			else {
+				System.out.println("not deleted");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }                                                  
 
     private void addIntervviewBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                 
