@@ -108,11 +108,11 @@ try {
 		boolean done = false;
 		
 		try {
-			System.out.println(userType);
 					int ra = -1;
 					if(userType == 'c' || userType == 'C') {
-						pre = con.prepareStatement("update its_tbl_candidate set"
-								+ "primarySkills= ?, secondarySkills = ?, designation = ?, qualification= ?, noticePeriod = ?, location =?, experience = ?"
+						System.out.println("im here!!!!!!!!!!!!!");
+						pre = con.prepareStatement("update its_tbl_candidate set "
+								+ "primarySkills= ?, secondarySkills = ?, designation = ?, qualification= ?, noticePeriod = ?, location =?, experience = ? "
 								+ "where candidateId = ?");
 						pre.setString(1, priSkill);
 						pre.setString(2, secSkill);

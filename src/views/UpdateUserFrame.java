@@ -198,7 +198,6 @@ public class UpdateUserFrame extends javax.swing.JFrame {
         updateuserBtn.setText("Update ");
         updateuserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	System.out.println(userType);
             	Map<String, String> map = new HashMap<>();
             	map.put("first_name", firstName.getText());
         		map.put("last_name", lastName.getText());
@@ -214,16 +213,22 @@ public class UpdateUserFrame extends javax.swing.JFrame {
         		map.put("mob_no", mobile.getText());
         		map.put("email", email.getText());
         		User u = new User(userId.getText());
-        		if(u.setAllDetails(map))
-        			if(userType!='h'|| userType!='H' || u.updateUser(userType, primary_skill.getText(), sec_skill.getText(), experience.getText()
+        		if(u.setAllDetails(map)) {
+        			if(userType=='h'|| userType=='H')
+        				System.out.println("updated hr");
+        			else
+        				if(u.updateUser(userType, primary_skill.getText(), sec_skill.getText(), experience.getText()
         					, qualifiication.getText(), designation.getText(), noticePeriod.getText(), otherLocation.getText(), subjectFiled.getText()))
         				System.out.println("User details got updated!!!!!!!");
         			else 
         				System.out.println("user was not updated");
+        		}
         		else 
         			System.out.println("User updation failed");
+        		UsersPanelFrame sPanel = new UsersPanelFrame();
+            	sPanel.setVisible(true);
+        		sPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
         		dispose();
-        		
             }
         });
 

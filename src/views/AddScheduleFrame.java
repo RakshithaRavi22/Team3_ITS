@@ -1,7 +1,11 @@
  
 package views;
 
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
+
+import Schedule.InterviewSchedule;
  
 public class AddScheduleFrame extends javax.swing.JFrame {
  
@@ -95,7 +99,18 @@ public class AddScheduleFrame extends javax.swing.JFrame {
         addBtn.setText("Add");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtnActionPerformed(evt);
+            	try {
+					InterviewSchedule schedule = new InterviewSchedule(candidateId1.getText(), subject.getText(), techId.getText(), techDate1.getText(), techTime.getText());
+					
+					boolean isInserted = schedule.insert();
+					
+					if(isInserted)
+						System.out.println("inserted");
+					else System.out.println("not inserted");
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
             }
         });
 

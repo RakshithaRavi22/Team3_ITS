@@ -82,6 +82,11 @@ public class UsersPanelFrame extends javax.swing.JFrame {
             	if(isDeleted)
             		System.out.println("deleted");
             	else System.out.println("not deleted");
+            	
+            	dispose();
+            	UsersPanelFrame usersPanel = new UsersPanelFrame();
+            	usersPanel.setVisible(true);
+            	usersPanel.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }
         });
 

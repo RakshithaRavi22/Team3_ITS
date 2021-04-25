@@ -7,6 +7,8 @@ package views;
 
 import javax.swing.JFrame;
 
+import Schedule.InterviewSchedule;
+
 /**
  *
  * @author rages
@@ -15,8 +17,13 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form SchedulePanelFrame
-     */
+     */       
+	String[][] interviews;
     public SchedulePanelFrame() {
+    	
+    	InterviewSchedule in = new InterviewSchedule();
+    	interviews = in.getAllSchedules();
+    	
         initComponents();
     }
 
@@ -39,20 +46,17 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         interviewId = new javax.swing.JTextField();
 
+        
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel1.setText("Schedule Interviews");
 
         schedultTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
+           interviews,
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Interview ID", "Candidate Id", "Subject", "tech id", "Tech Date", "Tech Time", "Tech rating", "Hr Id", "HR Date", "HR Time", "HR rating", "Result"
             }
         ));
         jScrollPane1.setViewportView(schedultTable);
@@ -97,7 +101,7 @@ public class SchedulePanelFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(updateInterviewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
