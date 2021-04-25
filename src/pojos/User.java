@@ -30,24 +30,27 @@ public class User {
 
 	}
 
-	public User(String userId) throws SQLException {
-		this.con = DBConnect.con;
-		String query = "select * from user where user_id="+"\""+userId+"\"";
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(query);
-		this.setUserId(userId);
-		while(rs.next()) {
-			this.first_name = rs.getString("first_name");
-			this.last_name = rs.getString("last_name");
-			this.dob = rs.getString("dob");
-			this.gender = rs.getString("gender").charAt(0);
-			this.street = rs.getString("street");
-			this.location = rs.getString("location");
-			this.city = rs.getString("city");
-			this.state = rs.getString("state");
-			this.zipcode = rs.getLong("zipcode");
-			this.mob_no = rs.getString("mobile_no");
-			this.email = rs.getString("email");
+	public User(String userId) {
+		try {
+			this.con = DBConnect.con;
+			String query = "select * from user where user_id=" + "\"" + userId + "\"";
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			this.setUserId(userId);
+			while (rs.next()) {
+				this.first_name = rs.getString("first_name");
+				this.last_name = rs.getString("last_name");
+				this.dob = rs.getString("dob");
+				this.gender = rs.getString("gender").charAt(0);
+				this.street = rs.getString("street");
+				this.location = rs.getString("location");
+				this.city = rs.getString("city");
+				this.state = rs.getString("state");
+				this.zipcode = rs.getLong("zipcode");
+				this.mob_no = rs.getString("mobile_no");
+				this.email = rs.getString("email");
+			} 
+		} catch (Exception e) {
 		}
 	}
 	
@@ -70,10 +73,12 @@ public class User {
 		
 	}
 	
-	public boolean updateUser() {
-		boolean done = false;
-
-		try {
+	
+	
+	private boolean updateUser() {
+try {
+			
+			
 			pre = con.prepareStatement("update user set first_name = ?, last_name = ?, dob = ?, gender = ?, street = ?, location = ?, city = ?, state = ?, zipcode = ?, mobile_no = ?, email = ? where user_id= ?");
 			// Uncomment when done with GUI
 
@@ -90,14 +95,47 @@ public class User {
 			pre.setString(11, email);
 			pre.setString(12, userId);
 			int ra=pre.executeUpdate();
-			if(ra>0) {
-				System.out.println("Users details updated successfully..");
-				done = true;
-			}
-			else {
-				System.out.println("Users details are not updated");
-				done = false;
-			}
+			if(ra>0)
+				return true;
+			else return false;
+	}
+	catch(Exception e) {System.out.println(e);}
+			
+		return false;
+	}
+
+	public boolean updateUser(char userType, String priSkill, String secSkill, String exp, String quali, String desig, String noticeP,String loc, String sub) {
+		boolean done = false;
+		
+		try {
+			System.out.println(userType);
+					int ra = -1;
+					if(userType == 'c' || userType == 'C') {
+						pre = con.prepareStatement("update its_tbl_candidate set"
+								+ "primarySkills= ?, secondarySkills = ?, designation = ?, qualification= ?, noticePeriod = ?, location =?, experience = ?"
+								+ "where candidateId = ?");
+						pre.setString(1, priSkill);
+						pre.setString(2, secSkill);
+						pre.setString(3, desig);
+						pre.setString(4, quali);
+						pre.setInt(5, Integer.parseInt(noticeP));
+						pre.setString(6, loc);
+						pre.setFloat(7, Float.parseFloat(exp));
+						pre.setString(8, userId);
+						ra = pre.executeUpdate();
+					}
+					else if(userType=='t' || userType=='T')
+					{
+						System.out.println(sub);
+						pre = con.prepareStatement("update its_tbl_techpanel set subjects=? where techId = ?");
+						pre.setString(1, sub);
+						pre.setString(2, userId);
+						ra = pre.executeUpdate();
+					}
+					if(ra>0)
+						done = true;
+					else 
+						done = false;
 			pre.close();
 
 		} catch (SQLException e) {
@@ -267,28 +305,7 @@ public class User {
 	
 	
 	public static void main(String[] args) {
-		try {
-			User u = new User("go1003");
-			
-			Map<String,String> map = new HashMap<>();
-			
-			map.put("first_name", "tom");
-			map.put("last_name", "tom");
-			map.put("dob", "1999-05-06");
-			map.put("gender", "m");
-			map.put("street", "tom");
-			map.put("location", "tom");
-			map.put("city", "tom");
-			map.put("state", "tom");
-			map.put("zipcode", "98745");
-			map.put("mob_no", "6987456325");
-			map.put("email", "tom");
-			
-			System.out.println(u.setAllDetails(map));
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 }

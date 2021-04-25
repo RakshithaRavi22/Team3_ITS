@@ -267,7 +267,13 @@ public class UserDriver {
 		
 	}
 	
-	
+	public static User getUserDetails(String userId) throws SQLException {
+		
+		User user1 = new User(userId);
+		ArrayList<User> Userdetails = user1.getDetails();
+		return Userdetails.get(0);		
+
+	}
 	
 
 	
@@ -277,9 +283,7 @@ public class UserDriver {
 			
 			UserCredentials uc = new UserCredentials(userId);
 			char userType = uc.getUserType();
-			User user1 = new User(userId);
-			ArrayList<User> Userdetails = user1.getDetails();
-			User user = Userdetails.get(0);
+			User user = getUserDetails(userId);
 			
 			if(uc.checkUserCredentials(password)) {
 				if(userType=='c' || userType == 'C') {
@@ -287,9 +291,7 @@ public class UserDriver {
 					
 					Candidate objC = new Candidate(userId);
 					ArrayList<Candidate> profDetails = objC.getProfessionalDetails();
-					objC = profDetails.get(0);
-					
-					
+					objC = profDetails.get(0);	
 					map.put("first_name", user.getFirst_name());
 					map.put("last_name", user.getLast_name());
 					map.put("email", user.getEmail());

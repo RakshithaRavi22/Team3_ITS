@@ -5,10 +5,15 @@
  */
 package views;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
 
+import pojos.Candidate;
+import pojos.TechPanel;
+import pojos.User;
+import pojos.UserCredentials;
 import pojos.UserDriver;
 
 /**
@@ -42,7 +47,7 @@ public class UsersPanelFrame extends javax.swing.JFrame {
         updateUserBtn = new javax.swing.JButton();
         deleteUserBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        userId_text = new javax.swing.JTextField();
         homeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,23 +66,31 @@ public class UsersPanelFrame extends javax.swing.JFrame {
         updateUserBtn.setText("Update User");
         updateUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateUserBtnActionPerformed(evt);
+                try {
+					updateUserBtnActionPerformed(evt);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
             }
         });
 
         deleteUserBtn.setText("Delete User");
         deleteUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteUserBtnActionPerformed(evt);
+            	User u = new User(userId_text.getText());
+            	boolean isDeleted = u.delete();
+            	if(isDeleted)
+            		System.out.println("deleted");
+            	else System.out.println("not deleted");
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Enter USER ID");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        userId_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                userId_textActionPerformed(evt);
             }
         });
 
@@ -105,7 +118,7 @@ public class UsersPanelFrame extends javax.swing.JFrame {
                             .addComponent(updateUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(deleteUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
+                            .addComponent(userId_text)
                             .addComponent(homeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                         .addGap(52, 52, 52))))
         );
@@ -120,7 +133,7 @@ public class UsersPanelFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(userId_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(updateUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -133,19 +146,26 @@ public class UsersPanelFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+    private void userId_textActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    
     }                                           
 
-    private void updateUserBtnActionPerformed(java.awt.event.ActionEvent evt) {                                              
-    	UpdateUserFrame updateUser = new UpdateUserFrame();
+    private void updateUserBtnActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {                                              
+    	char userType = new UserCredentials(userId_text.getText()).getUserType();
+    	
+    	
+    	Object obj = userType == 'c' || userType == 'C' ?  new Candidate(userId_text.getText()) : 
+    		userType == 't' || userType == 'T' ?  new TechPanel(userId_text.getText()) : null;
+    	
+    	UpdateUserFrame updateUser = new UpdateUserFrame(
+    			userType, new User(userId_text.getText()), obj);
     	updateUser.setVisible(true);
 		updateUser.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		dispose();
     }                                             
 
     private void deleteUserBtnActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+    
     }                                             
 
     private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -196,7 +216,7 @@ public class UsersPanelFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField userId_text;
     private javax.swing.JButton updateUserBtn;
     private javax.swing.JTable userTable;
     // End of variables declaration                   
