@@ -45,9 +45,10 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
     	desig = li.get("desig");
     	candId = li.get("candId");
     	List<CandidateInterview> list = new UserDriver().getCandidateSchedule(candId);
-    	initComponents();
-    	if(list.size()==0)
+    	if(list.size()==0) {
+    		initComponents();
     		noSchedule.setVisible(true);
+    	}
     	else {
     		schedules = new String[list.size()][4];
     		int i=0;
@@ -71,6 +72,7 @@ public class CandidatePanelFrame extends javax.swing.JFrame {
 
     			i++;
     	}
+    		initComponents();
     	}
 
 

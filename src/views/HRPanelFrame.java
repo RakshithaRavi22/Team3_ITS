@@ -44,9 +44,10 @@ public class HRPanelFrame extends javax.swing.JFrame {
     	userType = li.get("userType");
     	List<HRInterview> scheduleDetails = new UserDriver().getHRSchedule(hrId);
     	
-    	initComponents();
+
     	if(scheduleDetails == null) {
 //    		System.out.println("HRPanel");
+    		initComponents();
     		noSchedule.setVisible(true);
     		tableDetails.setVisible(false);
     	}
@@ -60,8 +61,8 @@ public class HRPanelFrame extends javax.swing.JFrame {
     				schedules[i][3] = t.getHrInterviewTime();
     			i++;
     		}
+    		initComponents();
     	}
-    	
     	
     	messageLabel.setVisible(false);
     }
