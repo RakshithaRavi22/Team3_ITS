@@ -108,12 +108,12 @@ public class HRPanelFrame extends javax.swing.JFrame {
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dispose();
-                
+                new LoginGUI();
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("HR Dashboard");
+        jLabel1.setText("HELLO "+ first_name.toUpperCase());
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setText("Last Name");

@@ -34,12 +34,6 @@ public class UserDriver {
 	WelcomeGUI w;
 	static SignUpGUI s;
 	
-
-	public void say() {
-		System.out.println("Im in user driver class");
-	}
-	
-	
 	public UserDriver() {
 		con = DBConnect.con;
 		user = new User();
@@ -47,6 +41,9 @@ public class UserDriver {
 
 	}
 	
+	
+	
+	// Inserting data in pojo class and sending it into database
 	public int insert()
 	{
 		s=w.getSignUpGUI();
@@ -175,6 +172,10 @@ public class UserDriver {
 		}
 		return 0;
 	}
+
+	
+	
+	// checks if the user is valid or not
 	public String authenticateUserCode(String code) {
 		 Pattern technicalCode = Pattern.compile("^techwiley[0-9]{4}$", Pattern.CASE_INSENSITIVE);
 		 Pattern hrCode = Pattern.compile("^hrwiley[0-9]{4}$", Pattern.CASE_INSENSITIVE);
@@ -191,6 +192,9 @@ public class UserDriver {
 	}
 	
 	
+	
+	
+	// to get all details of interview schedule
 	public List<CandidateInterview> getCandidateSchedule(String candId) {
 		List<CandidateInterview> list;
 		try {
@@ -253,8 +257,7 @@ public class UserDriver {
 		
 	}
 	
-	
-	
+	// to get interview schedule of the particular HR
 	
 	public List<HRInterview> getHRSchedule(String hrId) {
 		List<HRInterview> list;
@@ -273,6 +276,9 @@ public class UserDriver {
 		
 	}
 	
+	
+	
+	// To get details for a user
 	public static User getUserDetails(String userId) throws SQLException {
 		
 		User user1 = new User(userId);
@@ -282,7 +288,7 @@ public class UserDriver {
 	}
 	
 
-	
+	//contains login authentication logic
 	public static Map<String, String> loginAuth(String userId, String password) {
 		Map<String, String> map =new HashMap<>();
 		try {
