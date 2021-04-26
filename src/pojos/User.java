@@ -11,6 +11,8 @@ import java.util.Map;
 
 import dao.DBConnect;
 
+
+//Class to create an object and perform operations on user table
 public class User {
 	private String userId;
 	private String first_name;
@@ -29,7 +31,7 @@ public class User {
 	public User() {
 
 	}
-
+	// Constructor to create an object that stores all the details of a particular user from the database
 	public User(String userId) {
 		try {
 			this.con = DBConnect.con;
@@ -54,7 +56,8 @@ public class User {
 		}
 	}
 	
-	
+	//Method to Set the details of the user that are being updated by the admin. 
+	// this method stores the data in the respective fields before updating it in the table
 	public boolean setAllDetails(Map<String,String> map) {
 		
 		first_name = map.get("first_name");
@@ -74,9 +77,10 @@ public class User {
 	}
 	
 	
-	
+	// This function is to update the user information.
+	// Only accessible by admin
 	private boolean updateUser() {
-try {
+		try {
 			
 			
 			pre = con.prepareStatement("update user set first_name = ?, last_name = ?, dob = ?, gender = ?, street = ?, location = ?, city = ?, state = ?, zipcode = ?, mobile_no = ?, email = ? where user_id= ?");
@@ -103,14 +107,14 @@ try {
 			
 		return false;
 	}
-
+	// This method is used to update the user particular table i.e., candidate table, techInterviewer table and hr interviewer table
 	public boolean updateUser(char userType, String priSkill, String secSkill, String exp, String quali, String desig, String noticeP,String loc, String sub) {
 		boolean done = false;
 		
 		try {
 					int ra = -1;
 					if(userType == 'c' || userType == 'C') {
-						System.out.println("im here!!!!!!!!!!!!!");
+//						System.out.println("im here!!!!!!!!!!!!!");
 						pre = con.prepareStatement("update its_tbl_candidate set "
 								+ "primarySkills= ?, secondarySkills = ?, designation = ?, qualification= ?, noticePeriod = ?, location =?, experience = ? "
 								+ "where candidateId = ?");
@@ -145,7 +149,8 @@ try {
 	}
 	
 	
-	
+	// This method is used to delete a particular user from the table
+	// only accessible by admin
 	public boolean delete() {
 		boolean done = false;
 		
@@ -174,7 +179,6 @@ try {
 		}
 		return done;
 	}
-	
 	
 	
 	
@@ -294,7 +298,7 @@ try {
 	}
 	
 	
-	
+	// Method to return all the details of a particular user in an arraylist
 	public ArrayList<User> getDetails() throws SQLException {
 		ArrayList<User> details = new ArrayList<>();
 			details.add(this);
@@ -304,8 +308,8 @@ try {
 	}
 	
 	
-	public static void main(String[] args) {
-		
-	}
+//	public static void main(String[] args) {
+//		
+//	}
 
 }

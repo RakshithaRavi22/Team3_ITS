@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import dao.DBConnect;
 
+
+//Class to create an object and perform operations on Tech table
 public class TechPanel {
 	
 	private String techId;
@@ -16,7 +18,7 @@ public class TechPanel {
 	
 	Connection con;
 
-
+// Constructor to create an object to store all the data of a tech interviewer from database
 public TechPanel(String TechID) throws SQLException {
 
 	con = DBConnect.con;
@@ -30,7 +32,7 @@ public TechPanel(String TechID) throws SQLException {
 	}
 }
 
-
+// Method to return all the info of a tech interviewer in an arraylist
 public  ArrayList<TechPanel> getProfessionalDetails() throws SQLException {
 	ArrayList<TechPanel> proffDetails = new ArrayList<TechPanel>();
 	proffDetails.add(this);
@@ -59,17 +61,17 @@ public String toString() {
 		Subjects = subjects;
 	}
 	
-	public static void main(String args[]) throws SQLException {
-		
-		TechPanel c = new TechPanel("bb1000");
-		System.out.println(c.getProfessionalDetails());
-		System.out.println(c.getProfessionalDetails().get(0).getTechName());
-		User u = new User("bb1000");
-		System.out.println(u.getDetails());
-		
-
-		
-	}
+//	public static void main(String args[]) throws SQLException {
+//		
+//		TechPanel c = new TechPanel("bb1000");
+//		System.out.println(c.getProfessionalDetails());
+//		System.out.println(c.getProfessionalDetails().get(0).getTechName());
+//		User u = new User("bb1000");
+//		System.out.println(u.getDetails());
+//		
+//
+//		
+//	}
 
 
 	public String getTechId() {

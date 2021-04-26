@@ -7,6 +7,8 @@ import java.sql.Statement;
 
 import dao.DBConnect;
 
+
+//Class to create an object and perform operations on user credentials table
 public class UserCredentials {
     private String userId;
     private String password;
@@ -17,6 +19,8 @@ public class UserCredentials {
     
     int flag = 0;
     
+    
+    // Constructor to create an obj that initializes the member variables
     public UserCredentials(String userId, String password, char userType, int status) {
         super();
         this.userId = userId;
@@ -25,6 +29,7 @@ public class UserCredentials {
         this.status = status;
     }
     
+    //Constructor to fetch user credentials of a particular user from the database
     public UserCredentials(String uid) throws SQLException {
     	con= DBConnect.con;
 		String query = "select * from user_credentials where user_id =" + "\"" + uid + "\"";
@@ -39,7 +44,7 @@ public class UserCredentials {
 		else
 			flag = 1;
     }
-    
+    // Method to check if the user is registered in or not
     public boolean checkUserCredentials(String password) throws SQLException {
     	if(flag == 1)
     		return false;
@@ -79,8 +84,8 @@ public class UserCredentials {
         this.status = status;
     }
     
-    public static void main(String args[]) throws SQLException {
-    	UserCredentials u = new UserCredentials("a1000");
-    	System.out.println(u.checkUserCredentials("dsdsds"));
-    }
+//    public static void main(String args[]) throws SQLException {
+//    	UserCredentials u = new UserCredentials("a1000");
+//    	System.out.println(u.checkUserCredentials("dsdsds"));
+//    }
 }
