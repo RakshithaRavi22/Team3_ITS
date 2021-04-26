@@ -176,6 +176,7 @@ public class AdminPanelFrame extends javax.swing.JFrame {
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {                                          
     		new LoginGUI();
+    		dispose();
     }                                         
 
     /**

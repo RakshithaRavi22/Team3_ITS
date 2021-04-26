@@ -44,8 +44,7 @@ public class UserDriver {
 		con = DBConnect.con;
 		user = new User();
 		sc=new Scanner(System.in);
-		w=new WelcomeGUI();
-		w.setUserD(this);
+
 	}
 	
 	public int insert()
@@ -462,7 +461,9 @@ public class UserDriver {
 		
 	public static void main(String[] args) {
 		
-		new UserDriver();
+		UserDriver start = new UserDriver();
+		start.w=new WelcomeGUI();
+		start.w.setUserD(start);
 		
 	}
 }
